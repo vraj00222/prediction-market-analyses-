@@ -543,20 +543,36 @@ kbd {
 }
 
 .chart-container {
-    padding: 32px;
+    padding: 16px 12px;
     background: linear-gradient(135deg, var(--bg) 0%, var(--bg-elevated) 100%);
     border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: center;
     position: relative;
 }
+
+.chart-container .plotly-chart {
+    width: 100%;
+    min-height: 460px;
+    border-radius: var(--radius-sm);
+}
+
+.chart-container .chart-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 460px;
+    color: var(--text-muted);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+/* Plotly overrides for dark theme */
+.chart-container .js-plotly-plot .plotly .modebar { top: 4px !important; right: 4px !important; }
+.chart-container .js-plotly-plot .plotly .modebar-btn { font-size: 16px !important; }
 
 .chart-container img {
     max-width: 100%;
     height: auto;
     border-radius: var(--radius-sm);
-    opacity: 0;
-    transition: opacity 0.6s var(--ease);
 }
 
 .chart-container img.loaded { opacity: 1; }

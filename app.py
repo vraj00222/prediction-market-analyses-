@@ -68,6 +68,13 @@ def serve_chart(filename):
     return send_from_directory(CHARTS_DIR, filename)
 
 
+@app.route("/api/chart-data/<path:filename>")
+def serve_chart_data(filename):
+    """Serve chart JSON data for Plotly rendering."""
+    chart_json_dir = os.path.join(app.static_folder, "data", "charts")
+    return send_from_directory(chart_json_dir, filename)
+
+
 # ── Run ────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     app.run(debug=True, port=5050)

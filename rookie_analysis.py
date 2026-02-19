@@ -19,6 +19,7 @@
 """
 
 from pathlib import Path
+import json as _json
 import duckdb
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
@@ -34,8 +35,17 @@ DATA_DIR = BASE_DIR / "data"
 OUTPUT_DIR = BASE_DIR / "output" / "rookie"
 CHARTS_DIR = BASE_DIR / "static" / "charts"
 JSON_DIR = BASE_DIR / "static" / "data"
-for d in (OUTPUT_DIR, CHARTS_DIR, JSON_DIR):
+CHART_JSON_DIR = BASE_DIR / "static" / "data" / "charts"
+for d in (OUTPUT_DIR, CHARTS_DIR, JSON_DIR, CHART_JSON_DIR):
     d.mkdir(parents=True, exist_ok=True)
+
+
+def _save_chart_json(filename: str, data: dict):
+    """Save chart data as JSON for Plotly rendering."""
+    path = CHART_JSON_DIR / filename
+    with open(path, "w") as f:
+        _json.dump(data, f, separators=(",", ":"))
+    print(f"  Saved JSON: {path}")
 
 KALSHI_TRADES = DATA_DIR / "kalshi" / "trades"
 KALSHI_MARKETS = DATA_DIR / "kalshi" / "markets"
@@ -144,6 +154,13 @@ def analysis_1_dataset_overview():
     plt.close(fig)
     print(f"\n  Saved: {OUTPUT_DIR / '1_dataset_overview.png'}")
 
+    # Export chart JSON for Plotly
+    _save_chart_json("1_dataset_overview.json", {
+        "months": [str(m)[:10] for m in df["month"]],
+        "trades_millions": (df["num_trades"] / 1e6).round(3).tolist(),
+        "contracts_millions": (df["contracts"] / 1e6).round(3).tolist(),
+    })
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  2. CALIBRATION CURVE — Are prediction markets accurate?
@@ -230,6 +247,13 @@ def analysis_2_calibration_curve():
         fig.savefig(dest / "2_calibration_curve.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {OUTPUT_DIR / '2_calibration_curve.png'}")
+
+    # Export chart JSON for Plotly
+    _save_chart_json("2_calibration_curve.json", {
+        "price": df["price"].tolist(),
+        "win_rate": df["win_rate"].round(3).tolist(),
+        "total_trades": df["total_trades"].tolist(),
+    })
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -321,6 +345,14 @@ def analysis_3_longshot_bias():
         fig.savefig(dest / "3_longshot_bias.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {OUTPUT_DIR / '3_longshot_bias.png'}")
+
+    # Export chart JSON for Plotly
+    _save_chart_json("3_longshot_bias.json", {
+        "price": df["price"].tolist(),
+        "implied_prob": (df["implied_prob"] * 100).round(3).tolist(),
+        "actual_win_rate": (df["actual_win_rate"] * 100).round(3).tolist(),
+        "ev_per_dollar": df["ev_per_dollar"].round(4).tolist(),
+    })
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -430,6 +462,15 @@ def analysis_4_maker_vs_taker():
     plt.close(fig)
     print(f"  Saved: {OUTPUT_DIR / '4_maker_vs_taker.png'}")
 
+    # Export chart JSON for Plotly
+    _save_chart_json("4_maker_vs_taker.json", {
+        "price": df["price"].tolist(),
+        "taker_excess": (df["taker_excess"] * 100).round(4).tolist(),
+        "maker_excess": (df["maker_excess"] * 100).round(4).tolist(),
+        "taker_pnl": df["taker_pnl"].round(0).tolist(),
+        "maker_pnl": df["maker_pnl"].round(0).tolist(),
+    })
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  5. TRADE SIZE DISTRIBUTION — Who trades big vs small?
@@ -506,6 +547,22 @@ def analysis_5_trade_size_distribution():
     plt.close(fig)
     print(f"  Saved: {OUTPUT_DIR / '5_trade_size_distribution.png'}")
 
+    # Export chart JSON for Plotly
+    # Bin edges for histogram (don't send 72M raw values)
+    hist_counts, hist_edges = np.histogram(df["trade_size"], bins=np.logspace(0, np.log10(df["trade_size"].max()), 50))
+    # Downsample lorenz curve to ~500 points
+    step = max(1, len(sorted_sizes) // 500)
+    _save_chart_json("5_trade_size_distribution.json", {
+        "hist_bin_edges": hist_edges.round(2).tolist(),
+        "hist_counts": hist_counts.tolist(),
+        "lorenz_pct_trades": (percentiles[::step] * 100).round(2).tolist(),
+        "lorenz_pct_volume": (cumulative_volume[::step] * 100).round(2).tolist(),
+        "median": float(median_size),
+        "mean": round(float(mean_size), 1),
+        "p99": float(p99_size),
+        "top_pct_half_volume": round(float(pct_at_50), 1),
+    })
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  6. RETURNS BY HOUR — When do informed traders trade?
@@ -573,6 +630,14 @@ def analysis_6_returns_by_hour():
         fig.savefig(dest / "6_returns_by_hour.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {OUTPUT_DIR / '6_returns_by_hour.png'}")
+
+    # Export chart JSON for Plotly
+    _save_chart_json("6_returns_by_hour.json", {
+        "hour": df["hour"].tolist(),
+        "excess_return": (df["excess_return"] * 100).round(4).tolist(),
+        "total_contracts_millions": (df["total_contracts"] / 1e6).round(3).tolist(),
+        "n_trades": df["n_trades"].tolist(),
+    })
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -685,6 +750,14 @@ def analysis_7_calibration_surface():
         fig.savefig(dest / "7_calibration_surface.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {OUTPUT_DIR / '7_calibration_surface.png'}")
+
+    # Export chart JSON for Plotly
+    time_labels_map = {0: "< 1h", 1: "1-6h", 2: "6-24h", 3: "1-3d", 4: "3-7d", 5: "7-30d", 6: "> 30d"}
+    _save_chart_json("7_calibration_surface.json", {
+        "price_bins": [f"{int(p)}-{int(p)+10}¢" for p in pivot.index],
+        "time_bins": [time_labels_map[int(c)] for c in pivot.columns],
+        "mispricing": [[round(v, 2) if not np.isnan(v) else None for v in row] for row in pivot.values.tolist()],
+    })
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -844,6 +917,31 @@ def analysis_8_monte_carlo_kelly():
         fig.savefig(dest / "8_monte_carlo_kelly.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"\n  Saved: {OUTPUT_DIR / '8_monte_carlo_kelly.png'}")
+
+    # Export chart JSON for Plotly
+    # Re-run 50 equity curves for JSON export
+    equity_curves = []
+    rng4 = np.random.default_rng(42)
+    for i in range(50):
+        sampled = rng4.choice(returns, size=n_trades_per_sim, replace=True)
+        equity = np.cumprod(1 + sampled * 0.05)
+        equity_curves.append(equity.round(4).tolist())
+
+    _save_chart_json("8_monte_carlo_kelly.json", {
+        "drawdowns": (max_drawdowns * 100).round(2).tolist(),
+        "final_returns": (final_returns * 100).round(2).tolist(),
+        "equity_curves": equity_curves,
+        "kelly_fractions": (kelly_fractions * 100).round(2).tolist(),
+        "kelly_median_return": (np.array(median_returns) * 100).round(2).tolist(),
+        "kelly_p5_return": (np.array(p5_returns) * 100).round(2).tolist(),
+        "kelly_p95_return": (np.array(p95_returns_list) * 100).round(2).tolist(),
+        "stats": {
+            "avg_return_pct": round(avg_return * 100, 2),
+            "win_rate_pct": round(win_rate * 100, 2),
+            "implied_prob_pct": round(implied_prob * 100, 2),
+            "n_trades": len(returns),
+        },
+    })
 
 
 # ══════════════════════════════════════════════════════════════════════════════
