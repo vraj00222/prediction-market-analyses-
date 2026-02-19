@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Market Analysis</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <span class="dot"></span>
+                <span>Prediction Market Analysis</span>
+            </div>
+            <div class="nav-links">
+                <a href="#overview" class="active" data-nav="overview">Overview</a>
+                <a href="#analyses" data-nav="analyses">Analyses</a>
+                <a href="https://github.com/Jon-Becker/prediction-market-analysis" target="_blank" rel="noopener">Dataset ↗</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="overview">
+        <div class="hero-badge">
+            <span class="pulse"></span>
+            <span id="hero-badge-text">Loading…</span>
+        </div>
+        <h1 id="hero-title"></h1>
+        <p id="hero-subtitle"></p>
+    </section>
+
+    <!-- Top-level Stats -->
+    <div class="stats-row" id="stats-row"></div>
+
+    <div class="divider"><hr></div>
+
+    <!-- Analysis Navigation -->
+    <div class="section" id="analyses">
+        <div class="section-header">
+            <span class="section-number">ANALYSES</span>
+            <h2>Deep Dives</h2>
+        </div>
+        <p class="section-desc">Click any analysis to explore the chart, methodology, and key findings.</p>
+    </div>
+
+    <div class="analysis-nav" id="analysis-nav"></div>
+
+    <!-- Analysis Detail (dynamic) -->
+    <div class="section" id="analysis-detail"></div>
+
+    <!-- Footer -->
+    <footer>
+        <span>Built on Jon Becker's
+            <a href="https://github.com/Jon-Becker/prediction-market-analysis" target="_blank" rel="noopener">prediction-market-analysis</a> dataset
+        </span>
+        <span>2026</span>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

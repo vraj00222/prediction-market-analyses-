@@ -1,0 +1,203 @@
+{
+  "overview": {
+    "total_trades": 72134741,
+    "total_trades_fmt": "72.1M",
+    "total_contracts": 18264873077,
+    "total_contracts_fmt": "18.3B",
+    "unique_markets": 586025,
+    "unique_markets_fmt": "586K",
+    "date_start": "2021-06-30",
+    "date_end": "2025-11-25",
+    "taker_pnl": -142636657,
+    "taker_pnl_fmt": "-143M",
+    "maker_pnl": 143785468,
+    "maker_pnl_fmt": "+144M",
+    "markets_listed": 7682445,
+    "markets_resolved": 7320904,
+    "resolved_yes": 1746188,
+    "resolved_no": 5568198,
+    "unique_events": 1197300
+  },
+  "hero": {
+    "badge": "485 million trades analyzed",
+    "title": "Prediction Market Microstructure",
+    "subtitle": "8 data-driven analyses of 72M+ Kalshi trades revealing how markets price probability, where biases hide, and who actually makes money."
+  },
+  "stats_bar": [
+    {
+      "label": "Total Trades",
+      "value": "72.1M",
+      "color": "accent",
+      "sub": "Kalshi exchange, Jun 2021 – Nov 2025"
+    },
+    {
+      "label": "Contracts Traded",
+      "value": "18.3B",
+      "color": "white",
+      "sub": "Total notional volume"
+    },
+    {
+      "label": "Unique Markets",
+      "value": "586K",
+      "color": "blue",
+      "sub": "Across 1.2M events"
+    },
+    {
+      "label": "Taker Losses",
+      "value": "-143M",
+      "color": "red",
+      "sub": "Contracts lost to makers"
+    },
+    {
+      "label": "Maker Gains",
+      "value": "+144M",
+      "color": "green",
+      "sub": "Structural liquidity edge"
+    }
+  ],
+  "analyses": [
+    {
+      "id": 1,
+      "title": "Dataset Overview",
+      "nav_subtitle": "Volume & growth trends",
+      "chart": "1_dataset_overview.png",
+      "description": "A bird's-eye view of the Kalshi prediction market: how much was traded, when, and how the platform grew from a niche exchange to handling billions of contracts per quarter.",
+      "what_it_shows": "Monthly trade counts and contract volumes on Kalshi from mid-2021 through late 2025. The platform saw exponential growth, especially around major events like elections and economic data releases. The top chart shows raw trade frequency; the bottom shows total contracts — a proxy for dollar-denominated volume.",
+      "takeaways": "Kalshi's growth has been explosive: from a handful of trades in 2021 to millions per month by 2025. Most \"No\" outcomes outnumber \"Yes\" ~3:1, which makes sense — many markets ask \"Will X unlikely thing happen?\" and the answer is usually no. The 7.3M resolved markets give us a massive sample for testing calibration and bias.",
+      "stats": [
+        { "label": "Total Trades", "value": "72,134,741", "color": "accent" },
+        { "label": "Total Contracts", "value": "18.3B", "color": "white" },
+        { "label": "Unique Markets", "value": "586,025", "color": "blue" },
+        { "label": "Date Range", "value": "Jun 2021 → Nov 2025", "color": "white", "small": true },
+        { "label": "Markets Resolved", "value": "7,320,904", "color": "green" },
+        { "label": "Resolved YES", "value": "1,746,188", "color": "white" },
+        { "label": "Resolved NO", "value": "5,568,198", "color": "white" },
+        { "label": "Unique Events", "value": "1,197,300", "color": "white" }
+      ],
+      "insights": [
+        { "text": "72M+ trades analyzed", "color": "blue" },
+        { "text": "7.3M resolved markets", "color": "green" },
+        { "text": "3:1 No vs Yes outcomes", "color": "amber" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Calibration Curve",
+      "nav_subtitle": "Do prices match reality?",
+      "chart": "2_calibration_curve.png",
+      "description": "The most fundamental test in prediction markets: if a contract trades at 70 cents (implying 70% probability), does the event actually happen ~70% of the time? Perfect calibration means all points land on the diagonal.",
+      "what_it_shows": "Each dot represents a price level (1–99 cents). The x-axis is the contract price (implied probability), the y-axis is how often contracts at that price actually won. The dashed gold line is perfect calibration. Points above it mean the market was underpricing the event; points below mean it was overpricing.",
+      "takeaways": "Overall, Kalshi markets are remarkably well-calibrated in the 20–80 cent range — prices genuinely reflect probabilities. But at the extremes (especially 1–10 cents), points fall below the diagonal: cheap contracts win even less than their price implies. This is the \"longshot bias\" we dig into next.",
+      "stats": [],
+      "insights": [
+        { "text": "Well-calibrated at 20–80¢", "color": "green" },
+        { "text": "Longshots overpriced at 1–10¢", "color": "red" },
+        { "text": "Dot size = trade volume", "color": "blue" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Longshot Bias",
+      "nav_subtitle": "Cheap contracts, bad bets",
+      "chart": "3_longshot_bias.png",
+      "description": "One of the most famous findings in prediction markets: contracts priced at 1–5 cents consistently win far less than their price implies. People overpay for unlikely outcomes — the same psychology behind lottery tickets.",
+      "what_it_shows": "Left chart: Implied probability (the price) vs actual win rate for contracts priced 1–20 cents. The blue bars are what the price claims the probability is; the orange bars are what actually happened. The gap = overpricing. Right chart: Expected return per $1 bet. Below the dashed $1.00 line means you're losing money on average. Red bars = losing bets, green = profitable.",
+      "takeaways": "A 1-cent contract implies a 1% chance, but historically resolves \"Yes\" far less than 1% of the time. Betting on longshots in prediction markets can have worse expected returns than slot machines. This is structural — driven by retail traders who love cheap \"lottery ticket\" bets.",
+      "stats": [],
+      "insights": [
+        { "text": "Longshots are worse than slot machines", "color": "red" },
+        { "text": "Behavioral: lottery-ticket psychology", "color": "amber" },
+        { "text": "Exploitable by selling longshots", "color": "green" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Maker vs Taker Returns",
+      "nav_subtitle": "Who actually profits",
+      "chart": "4_maker_vs_taker.png",
+      "description": "Every trade has two sides: the maker (passive limit order) and the taker (aggressive market order). This analysis quantifies the systematic wealth transfer from takers to makers.",
+      "what_it_shows": "Top: Excess return (actual win rate minus implied probability) for takers (red) and makers (green) at each price level. Takers are negative almost everywhere — they overpay. Makers earn small positive excess returns consistently. Bottom: Aggregate P&L by price bucket. The total wealth transfer is massive: takers have lost 143 million contracts to makers.",
+      "takeaways": "The \"institutional edge\" in prediction markets isn't superior forecasting. It's being a liquidity provider — patient, passive, and collecting the spread. This mirrors traditional finance where market makers profit from structure, not alpha.",
+      "stats": [
+        { "label": "Total Taker P&L", "value": "−142.6M", "color": "red" },
+        { "label": "Total Maker P&L", "value": "+143.8M", "color": "green" }
+      ],
+      "insights": [
+        { "text": "Takers lose systematically", "color": "red" },
+        { "text": "Makers earn structural edge", "color": "green" },
+        { "text": "~$143M wealth transfer", "color": "blue" }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Trade Size Distribution",
+      "nav_subtitle": "Retail vs institutional",
+      "chart": "5_trade_size_distribution.png",
+      "description": "Exploring how trade sizes are distributed across the market — most trades are small (retail), but a tiny fraction of large trades drives most of the volume.",
+      "what_it_shows": "Left: Log-log histogram of trade sizes. The distribution is heavily right-skewed — most trades are 10–100 contracts, but some are 10,000+. The vertical lines mark the median (40), mean (253), and 99th percentile (4,000). Right: A Lorenz curve showing volume concentration. The bottom 97.6% of trades (by size) account for only half the total volume.",
+      "takeaways": "The mean is 6× the median, signaling a fat-tailed distribution. A small number of large traders dominate volume, which is consistent with institutional/whale participation alongside a broad retail base.",
+      "stats": [
+        { "label": "Median Trade", "value": "40", "color": "white" },
+        { "label": "Mean Trade", "value": "253", "color": "white" },
+        { "label": "99th Percentile", "value": "4,000", "color": "amber" },
+        { "label": "Volume Conc.", "value": "Top 2.4%", "color": "red" }
+      ],
+      "insights": [
+        { "text": "Median: 40 contracts", "color": "blue" },
+        { "text": "Mean: 253 — 6× the median", "color": "amber" },
+        { "text": "Top 2.4% = 50% of volume", "color": "red" }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Returns by Hour of Day",
+      "nav_subtitle": "When to trade",
+      "chart": "6_returns_by_hour.png",
+      "description": "Does the time you trade matter? This analysis checks whether taker excess returns vary by hour, potentially revealing when informed vs uninformed participants are most active.",
+      "what_it_shows": "Each bar shows the taker's average excess return (actual win rate minus implied probability) for trades placed during that UTC hour. Green bars = positive excess return (takers did better than implied), red bars = negative. The gray background indicates volume.",
+      "takeaways": "Returns aren't uniform across the day. Certain hours show more negative taker returns — likely when more uninformed/retail flow hits the market. Periods with less negative (or slightly positive) taker returns may correspond to when informed traders are active and picking off stale quotes.",
+      "stats": [],
+      "insights": [
+        { "text": "Returns vary by time of day", "color": "amber" },
+        { "text": "Informed flow clusters at certain hours", "color": "blue" }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Calibration Surface",
+      "nav_subtitle": "2D mispricing heatmap",
+      "chart": "7_calibration_surface.png",
+      "description": "Going beyond the 1D calibration curve: a 2D heatmap showing how mispricing varies by both price level and time-to-close. This is the kind of analysis hedge funds use to build time-varying entry/exit rules.",
+      "what_it_shows": "Each cell shows the mispricing (actual win rate minus implied probability, in percentage points) for a specific price bucket and time-to-close bucket. Green = market underpriced the event (it happened more than expected). Red = market overpriced it.",
+      "takeaways": "Mispricing isn't static — it changes as resolution approaches. Some price/time combinations show consistent biases that could be exploited with time-aware strategies. This is more informative than a single calibration curve because it reveals when biases are strongest.",
+      "stats": [],
+      "insights": [
+        { "text": "Green = underpriced (buy opportunity)", "color": "green" },
+        { "text": "Red = overpriced (sell opportunity)", "color": "red" },
+        { "text": "2D view reveals time-varying bias", "color": "blue" }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Monte Carlo Kelly Sizing",
+      "nav_subtitle": "Risk sizing under uncertainty",
+      "chart": "8_monte_carlo_kelly.png",
+      "description": "Standard Kelly criterion over-sizes because it treats your estimated edge as certain. This analysis uses Monte Carlo resampling on real longshot trades to show the distribution of possible outcomes and drawdowns.",
+      "what_it_shows": "Top-left: Distribution of max drawdowns across 5,000 simulated trading paths (5% Kelly fraction). Top-right: Distribution of final returns — green = profitable paths, red = losing paths. Bottom-left: 50 sample equity curves showing the range of possible outcomes. Bottom-right: Kelly fraction sensitivity — how returns and their uncertainty change as you bet larger fractions.",
+      "takeaways": "The longshot YES signal has negative edge (−1.96 percentage points) — confirming longshot bias. Even with \"optimal\" Kelly sizing, most simulated paths lose money. This demonstrates why naive longshot betting is unprofitable and why Monte Carlo is essential for understanding the range of outcomes, not just the average.",
+      "stats": [
+        { "label": "Signal", "value": "Buy YES at 5–15¢", "color": "white", "small": true },
+        { "label": "Trades Tested", "value": "5,629,893", "color": "blue" },
+        { "label": "Avg Return", "value": "−22.37%", "color": "red" },
+        { "label": "Win Rate", "value": "7.91%", "color": "white" },
+        { "label": "Implied Prob", "value": "9.88%", "color": "white" },
+        { "label": "Edge", "value": "−1.96 pp", "color": "red" }
+      ],
+      "insights": [
+        { "text": "Negative edge: −1.96pp", "color": "red" },
+        { "text": "Longshot takers lose on average", "color": "amber" },
+        { "text": "Monte Carlo reveals tail risk", "color": "blue" }
+      ]
+    }
+  ]
+}

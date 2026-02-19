@@ -1,0 +1,5 @@
+flask>=3.0
+duckdb>=1.4
+matplotlib>=3.9
+numpy>=1.26
+pandas>=2.1

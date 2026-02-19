@@ -1,0 +1,39 @@
+# ── Data (50GB+) ──────────────────────────────────
+/data/
+
+# ── Python ────────────────────────────────────────
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# ── Jon Becker's original repo files ─────────────
+src/
+tests/
+scripts/
+docs/
+.github/
+main.py
+Makefile
+pyproject.toml
+uv.lock
+.python-version
+.env
+.env.example
+CONTRIBUTING.md
+LICENSE
+/index.html
+
+# ── Legacy output (keep static/charts/) ──────────
+output/
+
+# ── OS / Editor ──────────────────────────────────
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# ── Markdown (except README) ─────────────────────
+*.md
+!README.md
