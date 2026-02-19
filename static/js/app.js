@@ -175,6 +175,7 @@ async function renderPlotlyChart(analysis) {
         const renderers = {
             1: renderChart1, 2: renderChart2, 3: renderChart3, 4: renderChart4,
             5: renderChart5, 6: renderChart6, 7: renderChart7, 8: renderChart8,
+            9: renderChart9, 10: renderChart10, 11: renderChart11, 12: renderChart12,
         };
         if (renderers[analysis.id]) {
             await renderers[analysis.id](el, d);
@@ -398,6 +399,156 @@ async function renderChart8(el, d) {
         shapes: [
             { type: "line", x0: 0, x1: 200, y0: 1, y1: 1, xref: "x3", yref: "y3", line: { color: "rgba(255,255,255,0.15)", dash: "dash", width: 1 } },
             { type: "line", x0: 0, x1: 30, y0: 0, y1: 0, xref: "x4", yref: "y4", line: { color: "rgba(255,255,255,0.15)", dash: "dash", width: 1 } },
+        ],
+    };
+    await Plotly.newPlot(el, traces, layout, PLOTLY_CONFIG);
+}
+
+// 9 — Kalshi vs Polymarket (monthly bars + cumulative lines)
+async function renderChart9(el, d) {
+    const traces = [
+        { x: d.kalshi_months, y: d.kalshi_trades_m, type: "bar", name: "Kalshi", marker: { color: C.accent, opacity: 0.85 },
+          hovertemplate: "%{x|%b %Y}<br>%{y:.2f}M trades<extra>Kalshi</extra>", xaxis: "x", yaxis: "y" },
+        { x: d.poly_months, y: d.poly_trades_m, type: "bar", name: "Polymarket", marker: { color: C.green, opacity: 0.85 },
+          hovertemplate: "%{x|%b %Y}<br>%{y:.2f}M trades<extra>Poly</extra>", xaxis: "x", yaxis: "y" },
+        { x: d.kalshi_months, y: d.kalshi_cum_m, type: "scatter", mode: "lines", name: "Kalshi Cumulative",
+          line: { color: C.accent, width: 2.5 }, fill: "tozeroy", fillcolor: "rgba(129,140,248,0.1)",
+          hovertemplate: "%{x|%b %Y}<br>%{y:.1f}M cumulative<extra>Kalshi</extra>", xaxis: "x2", yaxis: "y2" },
+        { x: d.poly_months, y: d.poly_cum_m, type: "scatter", mode: "lines", name: "Polymarket Cumulative",
+          line: { color: C.green, width: 2.5 }, fill: "tozeroy", fillcolor: "rgba(52,211,153,0.1)",
+          hovertemplate: "%{x|%b %Y}<br>%{y:.1f}M cumulative<extra>Poly</extra>", xaxis: "x2", yaxis: "y2" },
+    ];
+    const layout = {
+        ...PLOTLY_LAYOUT,
+        title: { text: "Kalshi vs Polymarket: Monthly Trade Count", font: { size: 16, color: "#f0f0f3" } },
+        xaxis: { ...PLOTLY_LAYOUT.xaxis, domain: [0, 1] },
+        yaxis: { ...PLOTLY_LAYOUT.yaxis, title: "Trades (millions)", domain: [0.55, 1] },
+        xaxis2: { ...PLOTLY_LAYOUT.xaxis, domain: [0, 1], anchor: "y2" },
+        yaxis2: { ...PLOTLY_LAYOUT.yaxis, title: "Cumulative Trades (M)", domain: [0, 0.42], anchor: "x2" },
+        barmode: "group",
+        showlegend: true, legend: { x: 0, y: 1.12, orientation: "h", font: { size: 11 } },
+        height: 650,
+    };
+    await Plotly.newPlot(el, traces, layout, PLOTLY_CONFIG);
+}
+
+// 10 — Whale Tracker (top20 bar + Lorenz + distribution + pie)
+async function renderChart10(el, d) {
+    const shortAddr = d.top20_addresses.map(a => "..." + a.slice(-6));
+    const traces = [
+        { y: shortAddr, x: d.top20_volume_m, type: "bar", orientation: "h", name: "Top 20 Volume ($M)",
+          marker: { color: C.green, opacity: 0.85 },
+          hovertemplate: "%{y}<br>$%{x:.1f}M USDC<br>%{customdata:,} trades<extra></extra>",
+          customdata: d.top20_trades, xaxis: "x", yaxis: "y" },
+        { x: d.lorenz_x, y: d.lorenz_y, type: "scatter", mode: "lines", name: "Lorenz Curve",
+          line: { color: C.green, width: 2.5 }, fill: "tozeroy", fillcolor: "rgba(52,211,153,0.1)",
+          hovertemplate: "Bottom %{x:.1f}% of traders<br>= %{y:.1f}% of volume<extra></extra>",
+          xaxis: "x2", yaxis: "y2" },
+        { x: [0, 100], y: [0, 100], type: "scatter", mode: "lines",
+          line: { color: C.neutral, dash: "dash", width: 1 }, hoverinfo: "skip",
+          xaxis: "x2", yaxis: "y2", showlegend: false },
+        { x: d.bins_labels, y: d.bins_counts, type: "bar", name: "Addresses",
+          marker: { color: C.amber, opacity: 0.85 },
+          hovertemplate: "%{x} trades<br>%{y:,} addresses<extra></extra>",
+          xaxis: "x3", yaxis: "y3" },
+        { values: [d.top100_pct, Math.max(0, d.top10_pct - d.top100_pct), Math.max(0, 100 - d.top10_pct)],
+          labels: ["Top 100", "Top 10% (excl.)", "Remaining"], type: "pie",
+          marker: { colors: [C.red, C.amber, C.neutral] },
+          textinfo: "label+percent", textfont: { color: "#e0e0e0", size: 11 },
+          hovertemplate: "%{label}<br>%{percent}<extra></extra>",
+          domain: { x: [0.55, 1], y: [0, 0.42] }, showlegend: false },
+    ];
+    const layout = {
+        ...PLOTLY_LAYOUT,
+        title: { text: `Polymarket Whale Tracker (Gini: ${d.gini})`, font: { size: 16, color: "#f0f0f3" } },
+        xaxis:  { ...PLOTLY_LAYOUT.xaxis, title: "Volume ($M USDC)", domain: [0, 0.45] },
+        yaxis:  { ...PLOTLY_LAYOUT.yaxis, domain: [0.55, 1], automargin: true, tickfont: { size: 8, family: "JetBrains Mono, monospace" } },
+        xaxis2: { ...PLOTLY_LAYOUT.xaxis, title: "% of Traders", domain: [0.55, 1] },
+        yaxis2: { ...PLOTLY_LAYOUT.yaxis, title: "% of Volume", domain: [0.55, 1], anchor: "x2" },
+        xaxis3: { ...PLOTLY_LAYOUT.xaxis, title: "Trades per Address", domain: [0, 0.45] },
+        yaxis3: { ...PLOTLY_LAYOUT.yaxis, title: "Addresses (log)", type: "log", domain: [0, 0.42] },
+        showlegend: true, legend: { x: 0, y: 1.12, orientation: "h", font: { size: 10 } },
+        height: 700,
+        annotations: [
+            { x: 50, y: 2, xref: "x2", yref: "y2", text: `Gini = ${d.gini}`, showarrow: false, font: { color: C.red, size: 13 } },
+        ],
+    };
+    await Plotly.newPlot(el, traces, layout, PLOTLY_CONFIG);
+}
+
+// 11 — Market Categories (horizontal bars + stacked area)
+async function renderChart11(el, d) {
+    const traces = [
+        { y: d.categories, x: d.total_volume_m, type: "bar", orientation: "h", name: "Volume (M)",
+          marker: { color: d.categories.map(c => d.cat_colors[c] || C.neutral), opacity: 0.85 },
+          hovertemplate: "%{y}<br>%{x:.1f}M volume<extra></extra>",
+          xaxis: "x", yaxis: "y" },
+    ];
+    const cats = Object.keys(d.monthly_stacks);
+    cats.forEach(cat => {
+        traces.push({
+            x: d.monthly_months, y: d.monthly_stacks[cat], type: "scatter",
+            mode: "lines", stackgroup: "one", name: cat,
+            line: { color: d.cat_colors[cat] || C.neutral, width: 0.5 },
+            fillcolor: (d.cat_colors[cat] || C.neutral) + "b3",
+            hovertemplate: `%{x|%b %Y}<br>${cat}: %{y:,} markets<extra></extra>`,
+            xaxis: "x2", yaxis: "y2",
+        });
+    });
+    const layout = {
+        ...PLOTLY_LAYOUT,
+        title: { text: "Kalshi Market Categories", font: { size: 16, color: "#f0f0f3" } },
+        xaxis: { ...PLOTLY_LAYOUT.xaxis, title: "Total Volume (M contracts)", domain: [0, 0.42] },
+        yaxis: { ...PLOTLY_LAYOUT.yaxis, domain: [0, 1], automargin: true },
+        xaxis2: { ...PLOTLY_LAYOUT.xaxis, domain: [0.52, 1] },
+        yaxis2: { ...PLOTLY_LAYOUT.yaxis, title: "Markets Created", domain: [0, 1], anchor: "x2" },
+        showlegend: true, legend: { x: 0.52, y: 1.12, orientation: "h", font: { size: 10 } },
+    };
+    await Plotly.newPlot(el, traces, layout, PLOTLY_CONFIG);
+}
+
+// 12 — Spread & Liquidity (4 subplots)
+async function renderChart12(el, d) {
+    const barX = [];
+    for (let i = 0; i < d.hist_counts.length; i++) {
+        barX.push((d.hist_edges[i] + d.hist_edges[i + 1]) / 2);
+    }
+    const traces = [
+        { x: barX, y: d.hist_counts, type: "bar", name: "Spread Dist", marker: { color: C.blue, opacity: 0.8 },
+          hovertemplate: "Spread: %{x:.0f}¢<br>Count: %{y:,}<extra></extra>", xaxis: "x", yaxis: "y" },
+        { x: d.vol_x, y: d.vol_y, type: "scatter", mode: "lines+markers", name: "Spread vs Volume",
+          marker: { color: C.blue, size: 8 }, line: { color: C.blue, width: 2 },
+          hovertemplate: "Avg Vol: %{x:,.0f}<br>Avg Spread: %{y:.1f}¢<extra></extra>",
+          xaxis: "x2", yaxis: "y2" },
+        { x: d.time_labels, y: d.time_spread, type: "bar", name: "Spread vs Time",
+          marker: { color: C.amber, opacity: 0.85 },
+          hovertemplate: "%{x}<br>Avg Spread: %{y:.1f}¢<br>%{customdata:,} markets<extra></extra>",
+          customdata: d.time_counts, xaxis: "x3", yaxis: "y3" },
+        { x: d.price_x, y: d.price_y, type: "scatter", mode: "lines+markers", name: "Liquidity Smile",
+          marker: { color: C.green, size: 6 }, line: { color: C.green, width: 2 },
+          hovertemplate: "Mid: %{x}¢<br>Avg Spread: %{y:.1f}¢<extra></extra>",
+          xaxis: "x4", yaxis: "y4" },
+    ];
+    const layout = {
+        ...PLOTLY_LAYOUT,
+        title: { text: "Kalshi Spread & Liquidity Analysis", font: { size: 16, color: "#f0f0f3" } },
+        xaxis:  { ...PLOTLY_LAYOUT.xaxis, title: "Bid-Ask Spread (¢)", domain: [0, 0.46] },
+        yaxis:  { ...PLOTLY_LAYOUT.yaxis, title: "Markets", domain: [0.55, 1] },
+        xaxis2: { ...PLOTLY_LAYOUT.xaxis, title: "Volume (log)", type: "log", domain: [0.56, 1] },
+        yaxis2: { ...PLOTLY_LAYOUT.yaxis, title: "Avg Spread (¢)", domain: [0.55, 1], anchor: "x2" },
+        xaxis3: { ...PLOTLY_LAYOUT.xaxis, title: "Time to Close", domain: [0, 0.46] },
+        yaxis3: { ...PLOTLY_LAYOUT.yaxis, title: "Avg Spread (¢)", domain: [0, 0.42] },
+        xaxis4: { ...PLOTLY_LAYOUT.xaxis, title: "Mid Price (¢)", domain: [0.56, 1] },
+        yaxis4: { ...PLOTLY_LAYOUT.yaxis, title: "Avg Spread (¢)", domain: [0, 0.42], anchor: "x4" },
+        showlegend: true, legend: { x: 0, y: 1.12, orientation: "h", font: { size: 10 } },
+        height: 650,
+        shapes: [
+            { type: "line", x0: d.avg_spread, x1: d.avg_spread, y0: 0, y1: 1, yref: "paper", xref: "x",
+              line: { color: C.amber, dash: "dash", width: 1.5 } },
+        ],
+        annotations: [
+            { x: d.avg_spread, y: 1, xref: "x", yref: "paper", text: `Mean: ${d.avg_spread}¢`,
+              showarrow: false, font: { color: C.amber, size: 11 }, yshift: 10 },
         ],
     };
     await Plotly.newPlot(el, traces, layout, PLOTLY_CONFIG);

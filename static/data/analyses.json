@@ -21,12 +21,12 @@
   "hero": {
     "badge": "485 million trades analyzed",
     "title": "Prediction Market Microstructure",
-    "subtitle": "8 data-driven analyses of 72M+ Kalshi trades revealing how markets price probability, where biases hide, and who actually makes money."
+    "subtitle": "12 data-driven analyses of 72M+ Kalshi and 404M+ Polymarket trades revealing how markets price probability, where biases hide, and who actually makes money."
   },
   "stats_bar": [
-    { "label": "Total Trades", "value": "72.1M", "color": "accent", "sub": "Kalshi exchange, Jun 2021 – Nov 2025", "icon": "chart-bar" },
-    { "label": "Contracts Traded", "value": "18.3B", "color": "white", "sub": "Total notional volume", "icon": "layers" },
-    { "label": "Unique Markets", "value": "586K", "color": "blue", "sub": "Across 1.2M events", "icon": "globe" },
+    { "label": "Total Trades", "value": "476M+", "color": "accent", "sub": "Kalshi + Polymarket combined", "icon": "chart-bar" },
+    { "label": "Contracts Traded", "value": "18.3B", "color": "white", "sub": "Kalshi notional volume", "icon": "layers" },
+    { "label": "Unique Markets", "value": "8.1M", "color": "blue", "sub": "Across both platforms", "icon": "globe" },
     { "label": "Taker Losses", "value": "-143M", "color": "red", "sub": "Contracts lost to makers", "icon": "trending-down" },
     { "label": "Maker Gains", "value": "+144M", "color": "green", "sub": "Structural liquidity edge", "icon": "trending-up" }
   ],
@@ -257,6 +257,134 @@
         { "text": "Negative edge: -1.96pp", "color": "red" },
         { "text": "Longshot takers lose on average", "color": "amber" },
         { "text": "Monte Carlo reveals tail risk", "color": "blue" }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Kalshi vs Polymarket",
+      "nav_subtitle": "Platform head-to-head comparison",
+      "chart": "9_platform_comparison.png",
+      "description": "A side-by-side comparison of the two largest prediction market platforms: Kalshi (regulated US exchange) and Polymarket (crypto-native, on-chain). We compare monthly trade growth, cumulative scale, and market diversity.",
+      "what_it_shows": "Polymarket dwarfs Kalshi in raw trade volume — 404M vs 72M trades — driven by crypto-native users and on-chain accessibility. Polymarket saw explosive growth during the 2024 US election cycle. Kalshi has far more individual markets (7.7M vs 409K) reflecting its more granular event structure (e.g. individual game props).",
+      "takeaways": "Both platforms are growing fast, but they serve different audiences. Polymarket dominates in volume per market while Kalshi provides market breadth. Their growth curves show prediction markets entering mainstream adoption.",
+      "learn": {
+        "title": "Prediction Market Platforms",
+        "body": "Prediction markets let you trade contracts that pay out based on real-world events. Kalshi is a CFTC-regulated US exchange using an order book model with cents-denominated contracts. Polymarket is a crypto-native platform on Polygon where trades settle on-chain using USDC. The two represent fundamentally different approaches: regulatory compliance vs decentralized accessibility.",
+        "key_terms": [
+          { "term": "Kalshi", "definition": "A CFTC-regulated prediction market exchange based in the US. Users trade binary and ranged contracts on events like elections, weather, economics, and sports." },
+          { "term": "Polymarket", "definition": "A decentralized prediction market built on the Polygon blockchain. Trades settle in USDC (a stablecoin) with smart contract-based resolution." },
+          { "term": "On-Chain", "definition": "Refers to transactions recorded directly on a blockchain. Polymarket trades are on-chain, meaning every trade is publicly verifiable on the Polygon network." },
+          { "term": "Order Book", "definition": "A list of buy and sell orders at different prices. Both platforms use order book models, but Polymarket also used an earlier AMM (automated market maker) system." }
+        ]
+      },
+      "stats": [
+        { "label": "Kalshi Trades", "value": "72.1M", "color": "accent" },
+        { "label": "Polymarket Trades", "value": "404.5M", "color": "green" },
+        { "label": "Kalshi Markets", "value": "7.7M", "color": "accent" },
+        { "label": "Polymarket Markets", "value": "409K", "color": "green" },
+        { "label": "Poly Volume", "value": "$72.5B USDC", "color": "white" },
+        { "label": "Unique Poly Traders", "value": "1.93M", "color": "blue" }
+      ],
+      "insights": [
+        { "text": "Polymarket: 5.6× more trades than Kalshi", "color": "green" },
+        { "text": "Kalshi: 19× more individual markets", "color": "accent" },
+        { "text": "Both platforms growing exponentially", "color": "blue" }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Whale Tracker",
+      "nav_subtitle": "Polymarket address concentration",
+      "chart": "10_whale_tracker.png",
+      "description": "Analyzing 1.93 million unique Polymarket trading addresses to reveal the extreme concentration of volume among a handful of 'whale' traders. On-chain data means we can see every address's total activity.",
+      "what_it_shows": "Polymarket trading is extraordinarily concentrated. The top 100 addresses (0.005% of traders) account for 63.2% of all volume. The top 1% controls 87% of volume. The Gini coefficient of 0.969 is one of the highest concentration levels seen in any financial market — meaning a tiny fraction of wallets dominates the entire platform.",
+      "takeaways": "Prediction markets are dominated by whales. Most addresses trade rarely (800K+ made only 1 trade), while a few hundred accounts generate the majority of liquidity and volume. This has implications for price discovery — a few sophisticated actors likely set prices that millions of casual users follow.",
+      "learn": {
+        "title": "Whale Analysis & Concentration",
+        "body": "In crypto markets, a 'whale' is an address controlling outsized capital or volume. Since Polymarket is on-chain, every trade is publicly linked to a wallet address, enabling concentration analysis impossible on traditional exchanges. The Lorenz curve and Gini coefficient measure how unevenly volume is distributed — a Gini of 1.0 would mean one address does all the trading.",
+        "key_terms": [
+          { "term": "Gini Coefficient", "definition": "A number between 0 and 1 measuring inequality. 0 = perfectly equal (everyone trades the same amount), 1 = perfectly unequal (one address does everything). Polymarket's 0.969 indicates extreme concentration." },
+          { "term": "Lorenz Curve", "definition": "A graph showing cumulative share of volume vs share of addresses. A perfectly equal market would follow the diagonal. The further the curve bows away from the diagonal, the more concentrated trading is." },
+          { "term": "Whale", "definition": "A trader with outsized market impact. In Polymarket, the top 100 addresses control over 63% of all volume, making them market-moving whales." },
+          { "term": "On-Chain Transparency", "definition": "Because Polymarket runs on Polygon, every trade is publicly auditable. You can see exactly which address traded what, creating full transparency unlike traditional markets." }
+        ]
+      },
+      "stats": [
+        { "label": "Unique Addresses", "value": "1.93M", "color": "blue" },
+        { "label": "Gini Coefficient", "value": "0.969", "color": "red" },
+        { "label": "Top 100 Volume", "value": "63.2%", "color": "red" },
+        { "label": "Top 1% Volume", "value": "87.0%", "color": "red" },
+        { "label": "Top 10% Volume", "value": "95.3%", "color": "amber" },
+        { "label": "Total Volume", "value": "$72.5B", "color": "white" }
+      ],
+      "insights": [
+        { "text": "Gini 0.969: extreme whale concentration", "color": "red" },
+        { "text": "Top 100 wallets = 63% of all volume", "color": "amber" },
+        { "text": "800K+ addresses made only 1 trade", "color": "blue" }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Market Categories",
+      "nav_subtitle": "What people bet on",
+      "chart": "11_market_categories.png",
+      "description": "Breaking down Kalshi's 7.7 million markets into categories — Sports, Politics, Crypto, Economy, Weather, Entertainment, and more — to see what types of events attract the most trading activity.",
+      "what_it_shows": "Sports dominate Kalshi with 3.9M markets and 7.5B contracts in volume, driven by granular single-game props (NFL, NBA, etc.). Politics punches far above its weight — only 6,881 markets but 1.6B volume, meaning political markets are individually massive. Crypto and Economy & Finance round out the top 5. The stacked area chart shows how sports markets exploded in 2024-2025.",
+      "takeaways": "Kalshi's growth is heavily driven by sports betting — particularly NFL and NBA game props. Political markets are few in number but generate enormous volume per market. The 'Other' category is large, suggesting many niche markets that don't fit clean categories. Weather and Health markets remain small but represent Kalshi's unique regulatory positioning.",
+      "learn": {
+        "title": "Market Categories on Kalshi",
+        "body": "Kalshi structures markets as binary yes/no contracts on specific event outcomes. Each 'event' can have many individual markets — for example, a single NFL game might generate dozens of prop bets (player stats, point spreads, totals). This is why Sports has 3.9M markets. Political markets tend to be bigger events with fewer sub-markets but attract massive concentrated volume during election seasons.",
+        "key_terms": [
+          { "term": "Event Ticker", "definition": "Kalshi's internal identifier for groups of related markets. For example, KXMVENFLSINGLEGAME groups all prop bets for a specific NFL game." },
+          { "term": "Binary Market", "definition": "A market with exactly two outcomes: Yes or No. The contract pays $1 if the event happens and $0 if it doesn't." },
+          { "term": "Volume", "definition": "Total number of contracts traded in a market. Higher volume means more liquidity and typically tighter spreads." },
+          { "term": "Prop Bet", "definition": "A bet on a specific proposition within a larger event — e.g., 'Will Player X score 20+ points?' rather than just 'Who wins the game?'" }
+        ]
+      },
+      "stats": [
+        { "label": "Top Category", "value": "Sports", "color": "accent" },
+        { "label": "Sports Markets", "value": "3.9M", "color": "blue" },
+        { "label": "Sports Volume", "value": "7.5B", "color": "white" },
+        { "label": "Political Markets", "value": "6,881", "color": "red" },
+        { "label": "Political Volume", "value": "1.6B", "color": "red" },
+        { "label": "Total Categories", "value": "9", "color": "white" }
+      ],
+      "insights": [
+        { "text": "Sports: 51% of all markets", "color": "accent" },
+        { "text": "Politics: 6.9K markets → 1.6B volume", "color": "red" },
+        { "text": "Crypto markets rapidly growing since 2024", "color": "amber" }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Spread & Liquidity",
+      "nav_subtitle": "Kalshi bid-ask spread analysis",
+      "chart": "12_spread_liquidity.png",
+      "description": "Analyzing bid-ask spreads across 334K Kalshi markets to understand liquidity conditions — how spreads relate to volume, time-to-expiry, and where across the price spectrum liquidity is deepest.",
+      "what_it_shows": "The average Kalshi spread is 58¢ (median 78¢) — extremely wide by traditional market standards, reflecting the nascent nature of prediction markets. Spreads narrow dramatically with volume (high-volume markets under 20¢). Time-to-close shows that markets far from expiry tend to have widest spreads. The 'liquidity smile' shows spreads are tightest at extreme prices (near 0 or 100¢) and widest in the 30-70¢ range where uncertainty is highest.",
+      "takeaways": "Prediction market liquidity is still thin — most markets have wide spreads that make frequent trading expensive. The relationship between volume and spread suggests that popular markets (politics, major sports) are much more efficient than niche ones. If you're trading, stick to high-volume markets to minimize spread costs.",
+      "learn": {
+        "title": "Understanding Bid-Ask Spreads",
+        "body": "The bid-ask spread is the difference between the highest price a buyer will pay (bid) and the lowest price a seller will accept (ask). It represents the cost of immediately trading — you buy at the ask and sell at the bid, instantly losing the spread. Market makers profit from this spread by posting both bids and asks. In traditional stock markets, spreads are fractions of a penny. In prediction markets, they can be tens of cents, reflecting lower liquidity and higher risk.",
+        "key_terms": [
+          { "term": "Bid-Ask Spread", "definition": "The difference between the best bid (highest buy) and best ask (lowest sell) price. A 10¢ spread means you lose 10¢ per contract just from the cost of trading." },
+          { "term": "Liquidity", "definition": "How easily you can trade without moving the price. High liquidity = tight spreads, lots of orders. Low liquidity = wide spreads, hard to trade large sizes." },
+          { "term": "Liquidity Smile", "definition": "The pattern where spreads are tightest at extreme prices (near 0¢ or 100¢) and widest in the middle (50¢). This mirrors the options volatility smile." },
+          { "term": "Mid Price", "definition": "The midpoint between bid and ask: (bid + ask) / 2. Used as a fair value estimate when the spread is wide." }
+        ]
+      },
+      "stats": [
+        { "label": "Avg Spread", "value": "58.3¢", "color": "red" },
+        { "label": "Median Spread", "value": "78¢", "color": "amber" },
+        { "label": "Markets Analyzed", "value": "334K", "color": "blue" },
+        { "label": "Spread @ High Vol", "value": "<20¢", "color": "green" },
+        { "label": "Widest Spread Zone", "value": "30-70¢", "color": "red" },
+        { "label": "Tightest Zone", "value": "Near 0/100¢", "color": "green" }
+      ],
+      "insights": [
+        { "text": "Avg 58¢ spread: very wide by market standards", "color": "red" },
+        { "text": "High-volume markets have much tighter spreads", "color": "green" },
+        { "text": "Liquidity smile: edges are cheapest to trade", "color": "blue" }
       ]
     }
   ]
