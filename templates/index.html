@@ -4,62 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Market Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 
+    <!-- Cursor glow effect -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="nav-inner">
             <div class="nav-brand">
-                <span class="dot"></span>
-                <span>Prediction Market Analysis</span>
+                <div class="logo-mark">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="2" y="2" width="7" height="7" rx="2" fill="currentColor" opacity="0.9"/>
+                        <rect x="11" y="2" width="7" height="7" rx="2" fill="currentColor" opacity="0.5"/>
+                        <rect x="2" y="11" width="7" height="7" rx="2" fill="currentColor" opacity="0.5"/>
+                        <rect x="11" y="11" width="7" height="7" rx="2" fill="currentColor" opacity="0.3"/>
+                    </svg>
+                </div>
+                <span>PredictView</span>
             </div>
             <div class="nav-links">
                 <a href="#overview" class="active" data-nav="overview">Overview</a>
                 <a href="#analyses" data-nav="analyses">Analyses</a>
-                <a href="https://github.com/Jon-Becker/prediction-market-analysis" target="_blank" rel="noopener">Dataset ↗</a>
+                <a href="https://github.com/Jon-Becker/prediction-market-analysis" target="_blank" rel="noopener">
+                    Dataset
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-left:3px"><path d="M3.5 3h5.5v5.5M9 3L3 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
     <section class="hero" id="overview">
-        <div class="hero-badge">
-            <span class="pulse"></span>
-            <span id="hero-badge-text">Loading…</span>
+        <div class="hero-grid-bg"></div>
+        <div class="hero-radial"></div>
+        <div class="hero-content">
+            <div class="hero-badge" id="hero-badge">
+                <span class="pulse"></span>
+                <span id="hero-badge-text">Loading...</span>
+            </div>
+            <h1 id="hero-title"></h1>
+            <p id="hero-subtitle"></p>
+            <div class="hero-cta">
+                <a href="#analyses" class="btn-primary">
+                    Explore Analyses
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <span class="hero-hint">or press <kbd>↓</kbd> to scroll</span>
+            </div>
         </div>
-        <h1 id="hero-title"></h1>
-        <p id="hero-subtitle"></p>
     </section>
 
     <!-- Top-level Stats -->
-    <div class="stats-row" id="stats-row"></div>
-
-    <div class="divider"><hr></div>
+    <div class="stats-section">
+        <div class="stats-row" id="stats-row"></div>
+    </div>
 
     <!-- Analysis Navigation -->
     <div class="section" id="analyses">
-        <div class="section-header">
-            <span class="section-number">ANALYSES</span>
-            <h2>Deep Dives</h2>
+        <div class="section-header-row">
+            <div>
+                <span class="section-eyebrow">Deep Dives</span>
+                <h2 class="section-title">8 Analyses</h2>
+            </div>
+            <p class="section-desc">Click any card below. Use <kbd>←</kbd> <kbd>→</kbd> arrow keys to navigate.</p>
         </div>
-        <p class="section-desc">Click any analysis to explore the chart, methodology, and key findings.</p>
     </div>
 
     <div class="analysis-nav" id="analysis-nav"></div>
 
-    <!-- Analysis Detail (dynamic) -->
+    <!-- Analysis Detail -->
     <div class="section" id="analysis-detail"></div>
 
     <!-- Footer -->
     <footer>
-        <span>Built on Jon Becker's
-            <a href="https://github.com/Jon-Becker/prediction-market-analysis" target="_blank" rel="noopener">prediction-market-analysis</a> dataset
-        </span>
-        <span>2026</span>
+        <div class="footer-inner">
+            <span>Built on <a href="https://github.com/Jon-Becker/prediction-market-analysis" target="_blank" rel="noopener">Jon Becker's dataset</a></span>
+            <span class="footer-sep">·</span>
+            <span>72M+ trades</span>
+            <span class="footer-sep">·</span>
+            <span>2026</span>
+        </div>
     </footer>
 
+    <!-- Framer Motion standalone (motion.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/motion@12.4.7/dist/motion.js"></script>
     <script src="/static/js/app.js"></script>
 </body>
 </html>

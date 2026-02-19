@@ -24,11 +24,11 @@ Built on [Jon Becker's](https://github.com/Jon-Becker/prediction-market-analysis
 git clone git@github.com:vraj00222/prediction-market-analyses-.git
 cd prediction-market-analyses-
 
-# Install dependencies
+# Install dependencies (requires Python 3.11+)
 pip install -r requirements.txt
 
 # Run the web dashboard
-python app.py
+python app.py          # or: uv run python app.py (if using uv)
 # Open http://localhost:5050
 ```
 
@@ -49,17 +49,18 @@ Charts are saved to `static/charts/` and `output/rookie/`.
 ## Project Structure
 
 ```
-├── app.py                  # Flask server (API + page serving)
-├── rookie_analysis.py      # Analysis script (generates charts + data)
+├── app.py                  # Flask server (API + page routes)
+├── rookie_analysis.py      # DuckDB analysis script (generates charts)
 ├── requirements.txt        # Python dependencies
+├── README.md
 ├── static/
-│   ├── css/style.css       # Dashboard styles
-│   ├── js/app.js           # Dynamic frontend (SPA)
-│   ├── charts/             # Generated chart PNGs
+│   ├── css/style.css       # Dark theme + animations
+│   ├── js/app.js           # SPA logic (Framer Motion)
+│   ├── charts/             # 8 pre-generated chart PNGs
 │   └── data/
-│       └── analyses.json   # Analysis metadata & stats
+│       └── analyses.json   # All analysis data + learn sections
 └── templates/
-    └── index.html          # HTML shell
+    └── index.html          # HTML shell (loads CSS/JS/Motion CDN)
 ```
 
 ## API Endpoints
@@ -76,8 +77,16 @@ Charts are saved to `static/charts/` and `output/rookie/`.
 ## Tech Stack
 
 - **Backend:** Flask, DuckDB, Matplotlib
-- **Frontend:** Vanilla JS (no framework), CSS custom properties
+- **Frontend:** Vanilla JS + [Framer Motion](https://motion.dev) (animation), CSS custom properties
 - **Data:** Apache Parquet via DuckDB
+
+## Features
+
+- Dark-theme dashboard with smooth Framer Motion animations
+- Collapsible "Learn" sections with beginner-friendly explanations & key term glossaries
+- Keyboard navigation (arrow keys) between analyses
+- Responsive grid layout (desktop → tablet → mobile)
+- Cursor-glow ambient light effect
 
 ## Dataset Stats
 
