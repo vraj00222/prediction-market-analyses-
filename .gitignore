@@ -1,6 +1,14 @@
 # ── Data (50 GB+, not committed) ─────────────────
 /data/
 
+# ── Generated outputs (run analysis scripts to regenerate) ──
+/output/
+/static/charts/
+/static/data/charts/
+
+# ── Temporary / exploratory scripts ──────────────
+explore_schema.py
+
 # ── Python ────────────────────────────────────────
 __pycache__/
 *.pyc
