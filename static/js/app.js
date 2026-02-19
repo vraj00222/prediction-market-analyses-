@@ -8,6 +8,8 @@ let DATA = null;
 let activeAnalysis = 0;
 let learnStates = {};
 let chartDataCache = {};       // cache fetched chart JSONs
+let currentPlatform = "all";   // "all" | "kalshi" | "polymarket"
+let filteredAnalyses = [];     // analyses visible for current platform
 const { animate, stagger, inView } = Motion;
 
 // ── Plotly shared theme ────────────────────────────────────
@@ -30,18 +32,80 @@ document.addEventListener("DOMContentLoaded", boot);
 async function boot() {
     setupCursorGlow();
     setupNavScroll();
+    setupPlatformSwitcher();
     try {
         const res = await fetch("/api/data");
         DATA = await res.json();
-        renderHero();
-        renderStatsBar();
-        renderAnalysisNav();
-        showAnalysis(0);
+        applyPlatform("all");
         setupIntersectionAnimations();
     } catch (err) {
         console.error("Failed to load data:", err);
         document.getElementById("hero-badge-text").textContent = "Error loading data";
     }
+}
+
+// ── Platform Switching ─────────────────────────────────────
+function setupPlatformSwitcher() {
+    const container = document.getElementById("platform-switcher");
+    if (!container) return;
+    container.addEventListener("click", (e) => {
+        const btn = e.target.closest(".platform-btn");
+        if (!btn || btn.classList.contains("active")) return;
+        const platform = btn.dataset.platform;
+        container.querySelectorAll(".platform-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        applyPlatform(platform);
+    });
+}
+
+function applyPlatform(platform) {
+    currentPlatform = platform;
+    document.body.setAttribute("data-platform", platform);
+
+    // Filter analyses for this platform
+    filteredAnalyses = DATA.analyses.filter(a => {
+        if (platform === "all") return true;
+        return a.platform === platform || a.platform === "both";
+    });
+
+    // Get platform-specific hero/stats
+    const pData = DATA.platforms && DATA.platforms[platform]
+        ? DATA.platforms[platform]
+        : { hero: DATA.hero, stats_bar: DATA.stats_bar };
+
+    renderHero(pData.hero);
+    renderStatsBar(pData.stats_bar);
+    renderAnalysisNav();
+    updateSectionHeader();
+    updateFooter();
+
+    if (filteredAnalyses.length > 0) {
+        showAnalysis(0);
+    } else {
+        document.getElementById("analysis-detail").innerHTML = "";
+    }
+}
+
+function updateSectionHeader() {
+    const eyebrow = document.getElementById("section-eyebrow");
+    const title = document.getElementById("section-title");
+    if (!eyebrow || !title) return;
+
+    const labels = {
+        all: { eyebrow: "Deep Dives", title: `${filteredAnalyses.length} Analyses` },
+        kalshi: { eyebrow: "Kalshi Exchange", title: `${filteredAnalyses.length} Analyses` },
+        polymarket: { eyebrow: "Polymarket On-Chain", title: `${filteredAnalyses.length} Analyses` },
+    };
+    const l = labels[currentPlatform] || labels.all;
+    eyebrow.textContent = l.eyebrow;
+    title.textContent = l.title;
+}
+
+function updateFooter() {
+    const el = document.getElementById("footer-trades");
+    if (!el) return;
+    const texts = { all: "476M+ trades", kalshi: "72M+ Kalshi trades", polymarket: "404M+ Polymarket trades" };
+    el.textContent = texts[currentPlatform] || texts.all;
 }
 
 // ── Cursor Glow ────────────────────────────────────────────
@@ -88,10 +152,14 @@ function setupIntersectionAnimations() {
 }
 
 // ── Hero ───────────────────────────────────────────────────
-function renderHero() {
-    const h = DATA.hero;
+function renderHero(hero) {
+    const h = hero || DATA.hero;
     document.getElementById("hero-badge-text").textContent = h.badge;
-    document.getElementById("hero-title").innerHTML = h.title.replace("Market", "Market<br>");
+    // Smart line break: split roughly in the middle at a word boundary
+    const words = h.title.split(" ");
+    const mid = Math.ceil(words.length / 2);
+    const titleHTML = words.slice(0, mid).join(" ") + "<br>" + words.slice(mid).join(" ");
+    document.getElementById("hero-title").innerHTML = titleHTML;
     document.getElementById("hero-subtitle").textContent = h.subtitle;
     animate("#hero-badge", { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, delay: 0.1 });
     animate("#hero-title", { opacity: [0, 1], y: [30, 0] }, { duration: 0.7, delay: 0.2 });
@@ -100,8 +168,9 @@ function renderHero() {
 }
 
 // ── Stats Bar ──────────────────────────────────────────────
-function renderStatsBar() {
-    document.getElementById("stats-row").innerHTML = DATA.stats_bar
+function renderStatsBar(statsBar) {
+    const stats = statsBar || DATA.stats_bar;
+    document.getElementById("stats-row").innerHTML = stats
         .map((s) => `<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value color-${s.color}">${s.value}</div><div class="stat-sub">${s.sub}</div></div>`)
         .join("");
 }
@@ -109,11 +178,19 @@ function renderStatsBar() {
 // ── Analysis Nav ───────────────────────────────────────────
 function renderAnalysisNav() {
     const container = document.getElementById("analysis-nav");
-    container.innerHTML = DATA.analyses.map((a, i) => `
+    const tagLabels = { kalshi: "Kalshi", polymarket: "Poly", both: "Both" };
+    container.innerHTML = filteredAnalyses.map((a, i) => {
+        const tagClass = `tag-${a.platform}`;
+        const showTag = currentPlatform === "all";
+        return `
         <a class="analysis-nav-item${i === 0 ? " active" : ""}" id="nav-${i}" data-index="${i}">
-            <div class="analysis-nav-num">${String(a.id).padStart(2, "0")}</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <div class="analysis-nav-num">${String(a.id).padStart(2, "0")}</div>
+                ${showTag ? `<span class="analysis-platform-tag ${tagClass}">${tagLabels[a.platform]}</span>` : ""}
+            </div>
             <div class="analysis-nav-text"><h4>${a.title}</h4><span>${a.nav_subtitle}</span></div>
-        </a>`).join("");
+        </a>`;
+    }).join("");
     container.addEventListener("click", (e) => {
         const item = e.target.closest(".analysis-nav-item");
         if (item) showAnalysis(parseInt(item.dataset.index));
@@ -123,7 +200,8 @@ function renderAnalysisNav() {
 // ── Show Analysis ──────────────────────────────────────────
 function showAnalysis(index) {
     const detail = document.getElementById("analysis-detail");
-    const a = DATA.analyses[index];
+    const a = filteredAnalyses[index];
+    if (!a) return;
 
     document.querySelectorAll(".analysis-nav-item").forEach((el, i) => el.classList.toggle("active", i === index));
     detail.classList.add("fading");
@@ -581,7 +659,7 @@ function buildAnalysisHTML(a) {
 
     return `
         <div class="analysis-heading">
-            <span class="num">${String(a.id).padStart(2, "0")} / ${String(DATA.analyses.length).padStart(2, "0")}</span>
+            <span class="num">${String(a.id).padStart(2, "0")} / ${String(filteredAnalyses.length).padStart(2, "0")}</span>
             <h2>${a.title}</h2>
         </div>
         <p class="analysis-desc">${a.description}</p>
@@ -600,8 +678,8 @@ function buildAnalysisHTML(a) {
         </div>
         ${learnHTML}
         <div style="display:flex;gap:12px;margin-top:24px;justify-content:space-between;">
-            ${a.id > 1 ? `<button class="nav-btn" onclick="showAnalysis(${a.id - 2})"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Previous</button>` : '<div></div>'}
-            ${a.id < DATA.analyses.length ? `<button class="nav-btn" onclick="showAnalysis(${a.id})">Next <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>` : '<div></div>'}
+            ${activeAnalysis > 0 ? `<button class="nav-btn" onclick="showAnalysis(${activeAnalysis - 1})"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Previous</button>` : '<div></div>'}
+            ${activeAnalysis < filteredAnalyses.length - 1 ? `<button class="nav-btn" onclick="showAnalysis(${activeAnalysis + 1})">Next <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>` : '<div></div>'}
         </div>`;
 }
 
@@ -625,8 +703,8 @@ function setupLearnToggle(analysisId) {
 
 // ── Keyboard Navigation ────────────────────────────────────
 document.addEventListener("keydown", (e) => {
-    if (!DATA) return;
-    const max = DATA.analyses.length - 1;
+    if (!DATA || !filteredAnalyses.length) return;
+    const max = filteredAnalyses.length - 1;
     if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); showAnalysis(Math.min(activeAnalysis + 1, max)); }
     else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); showAnalysis(Math.max(activeAnalysis - 1, 0)); }
 });

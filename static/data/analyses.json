@@ -24,11 +24,41 @@
     "subtitle": "12 data-driven analyses of 72M+ Kalshi and 404M+ Polymarket trades revealing how markets price probability, where biases hide, and who actually makes money."
   },
   "stats_bar": [
-    { "label": "Total Trades", "value": "476M+", "color": "accent", "sub": "Kalshi + Polymarket combined", "icon": "chart-bar" },
-    { "label": "Contracts Traded", "value": "18.3B", "color": "white", "sub": "Kalshi notional volume", "icon": "layers" },
-    { "label": "Unique Markets", "value": "8.1M", "color": "blue", "sub": "Across both platforms", "icon": "globe" },
-    { "label": "Taker Losses", "value": "-143M", "color": "red", "sub": "Contracts lost to makers", "icon": "trending-down" },
-    { "label": "Maker Gains", "value": "+144M", "color": "green", "sub": "Structural liquidity edge", "icon": "trending-up" }
+    {
+      "label": "Total Trades",
+      "value": "476M+",
+      "color": "accent",
+      "sub": "Kalshi + Polymarket combined",
+      "icon": "chart-bar"
+    },
+    {
+      "label": "Contracts Traded",
+      "value": "18.3B",
+      "color": "white",
+      "sub": "Kalshi notional volume",
+      "icon": "layers"
+    },
+    {
+      "label": "Unique Markets",
+      "value": "8.1M",
+      "color": "blue",
+      "sub": "Across both platforms",
+      "icon": "globe"
+    },
+    {
+      "label": "Taker Losses",
+      "value": "-143M",
+      "color": "red",
+      "sub": "Contracts lost to makers",
+      "icon": "trending-down"
+    },
+    {
+      "label": "Maker Gains",
+      "value": "+144M",
+      "color": "green",
+      "sub": "Structural liquidity edge",
+      "icon": "trending-up"
+    }
   ],
   "analyses": [
     {
@@ -44,27 +74,82 @@
         "title": "What is a Prediction Market?",
         "body": "A prediction market lets you buy and sell contracts that pay out based on real-world events. For example, \"Will it rain in NYC tomorrow?\" — you can buy a YES contract for 40 cents. If it rains, you get $1 back (60 cent profit). If not, you lose your 40 cents. The price (40 cents) is the market's estimate that there's a 40% chance of rain. When thousands of traders buy and sell, the price becomes a crowd-sourced probability estimate — often more accurate than polls or expert forecasts.",
         "key_terms": [
-          { "term": "Contract", "definition": "A tradeable bet that pays $1 if an event happens, $0 if it doesn't. The price is between $0.01 and $0.99." },
-          { "term": "Trade", "definition": "When one person buys a contract and another sells it. Each trade records the price, size (number of contracts), and time." },
-          { "term": "Resolved", "definition": "A market that has ended. The outcome is known — either YES (event happened) or NO (it didn't). This is how we check if prices were accurate." },
-          { "term": "Volume", "definition": "Total number of contracts traded. More volume = more people participating = more reliable prices." }
+          {
+            "term": "Contract",
+            "definition": "A tradeable bet that pays $1 if an event happens, $0 if it doesn't. The price is between $0.01 and $0.99."
+          },
+          {
+            "term": "Trade",
+            "definition": "When one person buys a contract and another sells it. Each trade records the price, size (number of contracts), and time."
+          },
+          {
+            "term": "Resolved",
+            "definition": "A market that has ended. The outcome is known — either YES (event happened) or NO (it didn't). This is how we check if prices were accurate."
+          },
+          {
+            "term": "Volume",
+            "definition": "Total number of contracts traded. More volume = more people participating = more reliable prices."
+          }
         ]
       },
       "stats": [
-        { "label": "Total Trades", "value": "72,134,741", "color": "accent" },
-        { "label": "Total Contracts", "value": "18.3B", "color": "white" },
-        { "label": "Unique Markets", "value": "586,025", "color": "blue" },
-        { "label": "Date Range", "value": "Jun 2021 → Nov 2025", "color": "white", "small": true },
-        { "label": "Markets Resolved", "value": "7,320,904", "color": "green" },
-        { "label": "Resolved YES", "value": "1,746,188", "color": "white" },
-        { "label": "Resolved NO", "value": "5,568,198", "color": "white" },
-        { "label": "Unique Events", "value": "1,197,300", "color": "white" }
+        {
+          "label": "Total Trades",
+          "value": "72,134,741",
+          "color": "accent"
+        },
+        {
+          "label": "Total Contracts",
+          "value": "18.3B",
+          "color": "white"
+        },
+        {
+          "label": "Unique Markets",
+          "value": "586,025",
+          "color": "blue"
+        },
+        {
+          "label": "Date Range",
+          "value": "Jun 2021 → Nov 2025",
+          "color": "white",
+          "small": true
+        },
+        {
+          "label": "Markets Resolved",
+          "value": "7,320,904",
+          "color": "green"
+        },
+        {
+          "label": "Resolved YES",
+          "value": "1,746,188",
+          "color": "white"
+        },
+        {
+          "label": "Resolved NO",
+          "value": "5,568,198",
+          "color": "white"
+        },
+        {
+          "label": "Unique Events",
+          "value": "1,197,300",
+          "color": "white"
+        }
       ],
       "insights": [
-        { "text": "72M+ trades analyzed", "color": "blue" },
-        { "text": "7.3M resolved markets", "color": "green" },
-        { "text": "3:1 No vs Yes outcomes", "color": "amber" }
-      ]
+        {
+          "text": "72M+ trades analyzed",
+          "color": "blue"
+        },
+        {
+          "text": "7.3M resolved markets",
+          "color": "green"
+        },
+        {
+          "text": "3:1 No vs Yes outcomes",
+          "color": "amber"
+        }
+      ],
+      "platform": "kalshi"
     },
     {
       "id": 2,
@@ -79,18 +164,40 @@
         "title": "What is Calibration?",
         "body": "Imagine a weather app that says \"70% chance of rain\" every day. If you check 100 such days, rain should have fallen on roughly 70 of them. If it only rained 50 times, the app is overconfident — it's poorly calibrated. Prediction markets work the same way. A contract priced at 70 cents claims there's a 70% chance the event happens. Calibration checks whether reality matches that claim. A perfectly calibrated market would have all points fall exactly on a 45-degree diagonal line. Deviations from that line reveal systematic errors we can study — and potentially exploit.",
         "key_terms": [
-          { "term": "Implied Probability", "definition": "The contract price interpreted as a probability. A contract at 70 cents implies 70%. It's what the crowd \"thinks\" the probability is." },
-          { "term": "Actual Win Rate", "definition": "How often contracts at a given price actually resolved YES. This is the ground truth we compare against." },
-          { "term": "Overpriced", "definition": "When a contract's price is higher than its actual win rate. Buyers of overpriced contracts lose money on average." },
-          { "term": "Underpriced", "definition": "When a contract's price is lower than its actual win rate. Buyers of underpriced contracts profit on average." }
+          {
+            "term": "Implied Probability",
+            "definition": "The contract price interpreted as a probability. A contract at 70 cents implies 70%. It's what the crowd \"thinks\" the probability is."
+          },
+          {
+            "term": "Actual Win Rate",
+            "definition": "How often contracts at a given price actually resolved YES. This is the ground truth we compare against."
+          },
+          {
+            "term": "Overpriced",
+            "definition": "When a contract's price is higher than its actual win rate. Buyers of overpriced contracts lose money on average."
+          },
+          {
+            "term": "Underpriced",
+            "definition": "When a contract's price is lower than its actual win rate. Buyers of underpriced contracts profit on average."
+          }
         ]
       },
       "stats": [],
       "insights": [
-        { "text": "Well-calibrated at 20–80¢", "color": "green" },
-        { "text": "Longshots overpriced at 1–10¢", "color": "red" },
-        { "text": "Dot size = trade volume", "color": "blue" }
-      ]
+        {
+          "text": "Well-calibrated at 20–80¢",
+          "color": "green"
+        },
+        {
+          "text": "Longshots overpriced at 1–10¢",
+          "color": "red"
+        },
+        {
+          "text": "Dot size = trade volume",
+          "color": "blue"
+        }
+      ],
+      "platform": "kalshi"
     },
     {
       "id": 3,
@@ -105,17 +212,36 @@
         "title": "Why Do People Overpay for Longshots?",
         "body": "This is one of the most studied phenomena in behavioral economics. When something costs only 2 cents and could pay $1, people think \"I could 50x my money!\" The potential payoff feels exciting, and the cost feels negligible. But the math doesn't work: if a 2-cent contract only wins 0.5% of the time (instead of the 2% the price implies), your expected return is actually -75%. This is the same psychology that makes people buy lottery tickets with negative expected value. In prediction markets, this bias is called the 'favorite-longshot bias' — favorites (high-priced contracts) are underbet, while longshots (cheap contracts) are overbet.",
         "key_terms": [
-          { "term": "Longshot", "definition": "A contract priced very low (1–10 cents), implying the event is unlikely. Think of it like a horse with 50:1 odds." },
-          { "term": "Expected Value (EV)", "definition": "The average outcome if you made the same bet thousands of times. EV = (win probability × payout) − cost. Negative EV = losing bet." },
-          { "term": "Favorite-Longshot Bias", "definition": "A well-documented pattern: people underbet favorites and overbet longshots. Found in horse racing, sports betting, and now prediction markets." }
+          {
+            "term": "Longshot",
+            "definition": "A contract priced very low (1–10 cents), implying the event is unlikely. Think of it like a horse with 50:1 odds."
+          },
+          {
+            "term": "Expected Value (EV)",
+            "definition": "The average outcome if you made the same bet thousands of times. EV = (win probability × payout) − cost. Negative EV = losing bet."
+          },
+          {
+            "term": "Favorite-Longshot Bias",
+            "definition": "A well-documented pattern: people underbet favorites and overbet longshots. Found in horse racing, sports betting, and now prediction markets."
+          }
         ]
       },
       "stats": [],
       "insights": [
-        { "text": "Longshots are worse than slot machines", "color": "red" },
-        { "text": "Behavioral: lottery-ticket psychology", "color": "amber" },
-        { "text": "Exploitable by selling longshots", "color": "green" }
-      ]
+        {
+          "text": "Longshots are worse than slot machines",
+          "color": "red"
+        },
+        {
+          "text": "Behavioral: lottery-ticket psychology",
+          "color": "amber"
+        },
+        {
+          "text": "Exploitable by selling longshots",
+          "color": "green"
+        }
+      ],
+      "platform": "kalshi"
     },
     {
       "id": 4,
@@ -130,21 +256,51 @@
         "title": "Makers vs Takers: The Hidden Game",
         "body": "Think of a farmer's market. A maker is like a vendor who puts up a sign saying \"Tomatoes: $3/lb.\" They set the price and wait. A taker is the person who walks up and says \"I'll buy at $3.\" The maker provides liquidity (makes goods available); the taker consumes it. In prediction markets, makers place limit orders at specific prices and wait. Takers hit those orders with market orders. Makers earn a small edge on each trade because they get to set favorable prices. Over millions of trades, these tiny edges compound into massive profits — $144M in this dataset. This is why almost all professional trading firms are makers, not takers.",
         "key_terms": [
-          { "term": "Maker (Limit Order)", "definition": "A trader who places an order at a specific price and waits for someone to match it. They 'make' the market by providing liquidity." },
-          { "term": "Taker (Market Order)", "definition": "A trader who accepts an existing price. They want to trade NOW and pay a premium for immediacy." },
-          { "term": "Excess Return", "definition": "How much better (or worse) a trade performed versus what the price implied. Positive = outperformed, negative = underperformed." },
-          { "term": "Bid-Ask Spread", "definition": "The gap between the best buy price and best sell price. Makers live inside this spread, earning small profits on each trade." }
+          {
+            "term": "Maker (Limit Order)",
+            "definition": "A trader who places an order at a specific price and waits for someone to match it. They 'make' the market by providing liquidity."
+          },
+          {
+            "term": "Taker (Market Order)",
+            "definition": "A trader who accepts an existing price. They want to trade NOW and pay a premium for immediacy."
+          },
+          {
+            "term": "Excess Return",
+            "definition": "How much better (or worse) a trade performed versus what the price implied. Positive = outperformed, negative = underperformed."
+          },
+          {
+            "term": "Bid-Ask Spread",
+            "definition": "The gap between the best buy price and best sell price. Makers live inside this spread, earning small profits on each trade."
+          }
         ]
       },
       "stats": [
-        { "label": "Total Taker P&L", "value": "−142.6M", "color": "red" },
-        { "label": "Total Maker P&L", "value": "+143.8M", "color": "green" }
+        {
+          "label": "Total Taker P&L",
+          "value": "−142.6M",
+          "color": "red"
+        },
+        {
+          "label": "Total Maker P&L",
+          "value": "+143.8M",
+          "color": "green"
+        }
       ],
       "insights": [
-        { "text": "Takers lose systematically", "color": "red" },
-        { "text": "Makers earn structural edge", "color": "green" },
-        { "text": "~$143M wealth transfer", "color": "blue" }
-      ]
+        {
+          "text": "Takers lose systematically",
+          "color": "red"
+        },
+        {
+          "text": "Makers earn structural edge",
+          "color": "green"
+        },
+        {
+          "text": "~$143M wealth transfer",
+          "color": "blue"
+        }
+      ],
+      "platform": "kalshi"
     },
     {
       "id": 5,
@@ -159,23 +315,61 @@
         "title": "Why Trade Size Matters",
         "body": "If you walk into a casino and see everyone betting $5 on roulette, that's a retail-dominated market. But if one person walks in and puts $50,000 on the table, they move the game. Prediction markets work the same way. Most participants trade small amounts (10–100 contracts), but a handful of large players (whales) dominate the total volume. This matters because large trades typically come from more informed or sophisticated participants. When you see a fat-tailed distribution (long right tail), it means extreme events (huge trades) happen far more often than a normal distribution would predict. Understanding who you're trading against is critical — if whales are on the other side, you might be the 'dumb money.'",
         "key_terms": [
-          { "term": "Fat-Tailed Distribution", "definition": "A statistical pattern where extreme values occur much more often than expected. The 'tail' of the distribution is thick, not thin." },
-          { "term": "Lorenz Curve", "definition": "A graph showing inequality of distribution. If perfectly equal, it's a straight diagonal. The more it bows, the more concentrated the volume." },
-          { "term": "Whale", "definition": "A trader who places unusually large orders. In crypto and prediction markets, whale activity can move prices significantly." },
-          { "term": "Median vs Mean", "definition": "When the mean is much larger than the median, it means a few extreme values are pulling the average up. Here: median = 40, mean = 253." }
+          {
+            "term": "Fat-Tailed Distribution",
+            "definition": "A statistical pattern where extreme values occur much more often than expected. The 'tail' of the distribution is thick, not thin."
+          },
+          {
+            "term": "Lorenz Curve",
+            "definition": "A graph showing inequality of distribution. If perfectly equal, it's a straight diagonal. The more it bows, the more concentrated the volume."
+          },
+          {
+            "term": "Whale",
+            "definition": "A trader who places unusually large orders. In crypto and prediction markets, whale activity can move prices significantly."
+          },
+          {
+            "term": "Median vs Mean",
+            "definition": "When the mean is much larger than the median, it means a few extreme values are pulling the average up. Here: median = 40, mean = 253."
+          }
         ]
       },
       "stats": [
-        { "label": "Median Trade", "value": "40", "color": "white" },
-        { "label": "Mean Trade", "value": "253", "color": "white" },
-        { "label": "99th Percentile", "value": "4,000", "color": "amber" },
-        { "label": "Volume Conc.", "value": "Top 2.4%", "color": "red" }
+        {
+          "label": "Median Trade",
+          "value": "40",
+          "color": "white"
+        },
+        {
+          "label": "Mean Trade",
+          "value": "253",
+          "color": "white"
+        },
+        {
+          "label": "99th Percentile",
+          "value": "4,000",
+          "color": "amber"
+        },
+        {
+          "label": "Volume Conc.",
+          "value": "Top 2.4%",
+          "color": "red"
+        }
       ],
       "insights": [
-        { "text": "Median: 40 contracts", "color": "blue" },
-        { "text": "Mean: 253 — 6x the median", "color": "amber" },
-        { "text": "Top 2.4% = 50% of volume", "color": "red" }
-      ]
+        {
+          "text": "Median: 40 contracts",
+          "color": "blue"
+        },
+        {
+          "text": "Mean: 253 — 6x the median",
+          "color": "amber"
+        },
+        {
+          "text": "Top 2.4% = 50% of volume",
+          "color": "red"
+        }
+      ],
+      "platform": "kalshi"
     },
     {
       "id": 6,
@@ -190,16 +384,32 @@
         "title": "Time-of-Day Effects in Trading",
         "body": "Not all hours are created equal. In traditional stock markets, the first and last hours of trading see the most volume and the most price movement. The same patterns exist in prediction markets. When retail traders are most active (evenings, after work), there tends to be more 'uninformed flow' — trades that aren't based on superior information. This is when makers profit most, because they're trading against people who are trading for entertainment or on gut feel. Conversely, during hours when informed traders are active (when news breaks, around data releases), prices are more accurate and takers may actually have an edge. Understanding these patterns can help you decide WHEN to trade, not just WHAT.",
         "key_terms": [
-          { "term": "Informed Flow", "definition": "Trades placed by people who have better information or analysis than the current market price reflects." },
-          { "term": "Uninformed Flow", "definition": "Trades placed for entertainment, gut feel, or without a specific informational advantage. This is what most retail traders generate." },
-          { "term": "Stale Quote", "definition": "A limit order at a price that no longer reflects current information. Informed traders 'pick off' stale quotes for profit." }
+          {
+            "term": "Informed Flow",
+            "definition": "Trades placed by people who have better information or analysis than the current market price reflects."
+          },
+          {
+            "term": "Uninformed Flow",
+            "definition": "Trades placed for entertainment, gut feel, or without a specific informational advantage. This is what most retail traders generate."
+          },
+          {
+            "term": "Stale Quote",
+            "definition": "A limit order at a price that no longer reflects current information. Informed traders 'pick off' stale quotes for profit."
+          }
         ]
       },
       "stats": [],
       "insights": [
-        { "text": "Returns vary by time of day", "color": "amber" },
-        { "text": "Informed flow clusters at certain hours", "color": "blue" }
-      ]
+        {
+          "text": "Returns vary by time of day",
+          "color": "amber"
+        },
+        {
+          "text": "Informed flow clusters at certain hours",
+          "color": "blue"
+        }
+      ],
+      "platform": "kalshi"
     },
     {
       "id": 7,
@@ -214,17 +424,36 @@
         "title": "From 1D to 2D: Why Time Matters",
         "body": "The calibration curve (Analysis 2) told us whether prices match reality at each price level. But it ignores a crucial variable: time. A contract trading at 50 cents might be perfectly calibrated 30 days before resolution, but systematically wrong 1 hour before. This surface adds the time dimension. Think of it like weather forecasting: a 7-day forecast for 70% rain is less reliable than a 1-hour forecast for 70% rain. Markets work similarly — prices near resolution should be more accurate. When they're NOT, that's a tradeable signal. Hedge funds build algorithms that look for exactly these 2D patterns: specific price ranges at specific times-to-close where the market consistently gets it wrong.",
         "key_terms": [
-          { "term": "Time-to-Close", "definition": "How much time remains before a market resolves (ends). Also called 'time to expiry' or 'time to maturity' in traditional finance." },
-          { "term": "Mispricing", "definition": "The gap between what the market price implies and what actually happened. Positive = underpriced (buy opportunity). Negative = overpriced (sell opportunity)." },
-          { "term": "Signal", "definition": "A systematic, repeatable pattern that can be used to make trading decisions. Not every pattern is a signal — it must persist over time and many observations." }
+          {
+            "term": "Time-to-Close",
+            "definition": "How much time remains before a market resolves (ends). Also called 'time to expiry' or 'time to maturity' in traditional finance."
+          },
+          {
+            "term": "Mispricing",
+            "definition": "The gap between what the market price implies and what actually happened. Positive = underpriced (buy opportunity). Negative = overpriced (sell opportunity)."
+          },
+          {
+            "term": "Signal",
+            "definition": "A systematic, repeatable pattern that can be used to make trading decisions. Not every pattern is a signal — it must persist over time and many observations."
+          }
         ]
       },
       "stats": [],
       "insights": [
-        { "text": "Green = underpriced (buy opportunity)", "color": "green" },
-        { "text": "Red = overpriced (sell opportunity)", "color": "red" },
-        { "text": "2D view reveals time-varying bias", "color": "blue" }
-      ]
+        {
+          "text": "Green = underpriced (buy opportunity)",
+          "color": "green"
+        },
+        {
+          "text": "Red = overpriced (sell opportunity)",
+          "color": "red"
+        },
+        {
+          "text": "2D view reveals time-varying bias",
+          "color": "blue"
+        }
+      ],
+      "platform": "kalshi"
     },
     {
       "id": 8,
@@ -239,25 +468,72 @@
         "title": "Kelly Criterion: How Much Should You Bet?",
         "body": "Even if you find a genuine edge (a bet with positive expected value), you can still go broke by betting too much. The Kelly criterion is a famous mathematical formula that tells you the optimal fraction of your bankroll to bet on each opportunity. Bet more than Kelly and you risk ruin. Bet less and you leave profit on the table. But here's the catch: Kelly assumes you know your exact edge. In practice, you're estimating it from data — and estimates have uncertainty. This is where Monte Carlo simulation comes in. Instead of calculating one answer, we run 5,000 simulated trading histories, each randomly sampling from real trades. This gives us a DISTRIBUTION of outcomes — showing not just the average, but the worst-case drawdowns, the probability of going broke, and how sensitive results are to bet sizing. It's the difference between \"this bet averages +5%\" and \"this bet averages +5% but has a 30% chance of losing half your bankroll.\"",
         "key_terms": [
-          { "term": "Kelly Criterion", "definition": "A formula for optimal bet sizing: f* = (edge / odds). It maximizes long-run growth rate while avoiding ruin. Named after John Larry Kelly Jr. (1956)." },
-          { "term": "Monte Carlo Simulation", "definition": "Running thousands of random scenarios to understand the range of possible outcomes. Instead of one prediction, you get a probability distribution." },
-          { "term": "Drawdown", "definition": "The largest peak-to-trough decline in your bankroll during a trading period. A 50% drawdown means your account fell by half at some point." },
-          { "term": "Ruin Probability", "definition": "The chance of losing your entire bankroll. Even with positive expected value, aggressive bet sizing can lead to ruin through bad luck sequences." }
+          {
+            "term": "Kelly Criterion",
+            "definition": "A formula for optimal bet sizing: f* = (edge / odds). It maximizes long-run growth rate while avoiding ruin. Named after John Larry Kelly Jr. (1956)."
+          },
+          {
+            "term": "Monte Carlo Simulation",
+            "definition": "Running thousands of random scenarios to understand the range of possible outcomes. Instead of one prediction, you get a probability distribution."
+          },
+          {
+            "term": "Drawdown",
+            "definition": "The largest peak-to-trough decline in your bankroll during a trading period. A 50% drawdown means your account fell by half at some point."
+          },
+          {
+            "term": "Ruin Probability",
+            "definition": "The chance of losing your entire bankroll. Even with positive expected value, aggressive bet sizing can lead to ruin through bad luck sequences."
+          }
         ]
       },
       "stats": [
-        { "label": "Signal", "value": "Buy YES at 5-15c", "color": "white", "small": true },
-        { "label": "Trades Tested", "value": "5,629,893", "color": "blue" },
-        { "label": "Avg Return", "value": "-22.37%", "color": "red" },
-        { "label": "Win Rate", "value": "7.91%", "color": "white" },
-        { "label": "Implied Prob", "value": "9.88%", "color": "white" },
-        { "label": "Edge", "value": "-1.96 pp", "color": "red" }
+        {
+          "label": "Signal",
+          "value": "Buy YES at 5-15c",
+          "color": "white",
+          "small": true
+        },
+        {
+          "label": "Trades Tested",
+          "value": "5,629,893",
+          "color": "blue"
+        },
+        {
+          "label": "Avg Return",
+          "value": "-22.37%",
+          "color": "red"
+        },
+        {
+          "label": "Win Rate",
+          "value": "7.91%",
+          "color": "white"
+        },
+        {
+          "label": "Implied Prob",
+          "value": "9.88%",
+          "color": "white"
+        },
+        {
+          "label": "Edge",
+          "value": "-1.96 pp",
+          "color": "red"
+        }
       ],
       "insights": [
-        { "text": "Negative edge: -1.96pp", "color": "red" },
-        { "text": "Longshot takers lose on average", "color": "amber" },
-        { "text": "Monte Carlo reveals tail risk", "color": "blue" }
-      ]
+        {
+          "text": "Negative edge: -1.96pp",
+          "color": "red"
+        },
+        {
+          "text": "Longshot takers lose on average",
+          "color": "amber"
+        },
+        {
+          "text": "Monte Carlo reveals tail risk",
+          "color": "blue"
+        }
+      ],
+      "platform": "kalshi"
     },
     {
       "id": 9,
@@ -271,25 +547,71 @@
         "title": "Prediction Market Platforms",
         "body": "Prediction markets let you trade contracts that pay out based on real-world events. Kalshi is a CFTC-regulated US exchange using an order book model with cents-denominated contracts. Polymarket is a crypto-native platform on Polygon where trades settle on-chain using USDC. The two represent fundamentally different approaches: regulatory compliance vs decentralized accessibility.",
         "key_terms": [
-          { "term": "Kalshi", "definition": "A CFTC-regulated prediction market exchange based in the US. Users trade binary and ranged contracts on events like elections, weather, economics, and sports." },
-          { "term": "Polymarket", "definition": "A decentralized prediction market built on the Polygon blockchain. Trades settle in USDC (a stablecoin) with smart contract-based resolution." },
-          { "term": "On-Chain", "definition": "Refers to transactions recorded directly on a blockchain. Polymarket trades are on-chain, meaning every trade is publicly verifiable on the Polygon network." },
-          { "term": "Order Book", "definition": "A list of buy and sell orders at different prices. Both platforms use order book models, but Polymarket also used an earlier AMM (automated market maker) system." }
+          {
+            "term": "Kalshi",
+            "definition": "A CFTC-regulated prediction market exchange based in the US. Users trade binary and ranged contracts on events like elections, weather, economics, and sports."
+          },
+          {
+            "term": "Polymarket",
+            "definition": "A decentralized prediction market built on the Polygon blockchain. Trades settle in USDC (a stablecoin) with smart contract-based resolution."
+          },
+          {
+            "term": "On-Chain",
+            "definition": "Refers to transactions recorded directly on a blockchain. Polymarket trades are on-chain, meaning every trade is publicly verifiable on the Polygon network."
+          },
+          {
+            "term": "Order Book",
+            "definition": "A list of buy and sell orders at different prices. Both platforms use order book models, but Polymarket also used an earlier AMM (automated market maker) system."
+          }
         ]
       },
       "stats": [
-        { "label": "Kalshi Trades", "value": "72.1M", "color": "accent" },
-        { "label": "Polymarket Trades", "value": "404.5M", "color": "green" },
-        { "label": "Kalshi Markets", "value": "7.7M", "color": "accent" },
-        { "label": "Polymarket Markets", "value": "409K", "color": "green" },
-        { "label": "Poly Volume", "value": "$72.5B USDC", "color": "white" },
-        { "label": "Unique Poly Traders", "value": "1.93M", "color": "blue" }
+        {
+          "label": "Kalshi Trades",
+          "value": "72.1M",
+          "color": "accent"
+        },
+        {
+          "label": "Polymarket Trades",
+          "value": "404.5M",
+          "color": "green"
+        },
+        {
+          "label": "Kalshi Markets",
+          "value": "7.7M",
+          "color": "accent"
+        },
+        {
+          "label": "Polymarket Markets",
+          "value": "409K",
+          "color": "green"
+        },
+        {
+          "label": "Poly Volume",
+          "value": "$72.5B USDC",
+          "color": "white"
+        },
+        {
+          "label": "Unique Poly Traders",
+          "value": "1.93M",
+          "color": "blue"
+        }
       ],
       "insights": [
-        { "text": "Polymarket: 5.6× more trades than Kalshi", "color": "green" },
-        { "text": "Kalshi: 19× more individual markets", "color": "accent" },
-        { "text": "Both platforms growing exponentially", "color": "blue" }
-      ]
+        {
+          "text": "Polymarket: 5.6× more trades than Kalshi",
+          "color": "green"
+        },
+        {
+          "text": "Kalshi: 19× more individual markets",
+          "color": "accent"
+        },
+        {
+          "text": "Both platforms growing exponentially",
+          "color": "blue"
+        }
+      ],
+      "platform": "both"
     },
     {
       "id": 10,
@@ -303,25 +625,71 @@
         "title": "Whale Analysis & Concentration",
         "body": "In crypto markets, a 'whale' is an address controlling outsized capital or volume. Since Polymarket is on-chain, every trade is publicly linked to a wallet address, enabling concentration analysis impossible on traditional exchanges. The Lorenz curve and Gini coefficient measure how unevenly volume is distributed — a Gini of 1.0 would mean one address does all the trading.",
         "key_terms": [
-          { "term": "Gini Coefficient", "definition": "A number between 0 and 1 measuring inequality. 0 = perfectly equal (everyone trades the same amount), 1 = perfectly unequal (one address does everything). Polymarket's 0.969 indicates extreme concentration." },
-          { "term": "Lorenz Curve", "definition": "A graph showing cumulative share of volume vs share of addresses. A perfectly equal market would follow the diagonal. The further the curve bows away from the diagonal, the more concentrated trading is." },
-          { "term": "Whale", "definition": "A trader with outsized market impact. In Polymarket, the top 100 addresses control over 63% of all volume, making them market-moving whales." },
-          { "term": "On-Chain Transparency", "definition": "Because Polymarket runs on Polygon, every trade is publicly auditable. You can see exactly which address traded what, creating full transparency unlike traditional markets." }
+          {
+            "term": "Gini Coefficient",
+            "definition": "A number between 0 and 1 measuring inequality. 0 = perfectly equal (everyone trades the same amount), 1 = perfectly unequal (one address does everything). Polymarket's 0.969 indicates extreme concentration."
+          },
+          {
+            "term": "Lorenz Curve",
+            "definition": "A graph showing cumulative share of volume vs share of addresses. A perfectly equal market would follow the diagonal. The further the curve bows away from the diagonal, the more concentrated trading is."
+          },
+          {
+            "term": "Whale",
+            "definition": "A trader with outsized market impact. In Polymarket, the top 100 addresses control over 63% of all volume, making them market-moving whales."
+          },
+          {
+            "term": "On-Chain Transparency",
+            "definition": "Because Polymarket runs on Polygon, every trade is publicly auditable. You can see exactly which address traded what, creating full transparency unlike traditional markets."
+          }
         ]
       },
       "stats": [
-        { "label": "Unique Addresses", "value": "1.93M", "color": "blue" },
-        { "label": "Gini Coefficient", "value": "0.969", "color": "red" },
-        { "label": "Top 100 Volume", "value": "63.2%", "color": "red" },
-        { "label": "Top 1% Volume", "value": "87.0%", "color": "red" },
-        { "label": "Top 10% Volume", "value": "95.3%", "color": "amber" },
-        { "label": "Total Volume", "value": "$72.5B", "color": "white" }
+        {
+          "label": "Unique Addresses",
+          "value": "1.93M",
+          "color": "blue"
+        },
+        {
+          "label": "Gini Coefficient",
+          "value": "0.969",
+          "color": "red"
+        },
+        {
+          "label": "Top 100 Volume",
+          "value": "63.2%",
+          "color": "red"
+        },
+        {
+          "label": "Top 1% Volume",
+          "value": "87.0%",
+          "color": "red"
+        },
+        {
+          "label": "Top 10% Volume",
+          "value": "95.3%",
+          "color": "amber"
+        },
+        {
+          "label": "Total Volume",
+          "value": "$72.5B",
+          "color": "white"
+        }
       ],
       "insights": [
-        { "text": "Gini 0.969: extreme whale concentration", "color": "red" },
-        { "text": "Top 100 wallets = 63% of all volume", "color": "amber" },
-        { "text": "800K+ addresses made only 1 trade", "color": "blue" }
-      ]
+        {
+          "text": "Gini 0.969: extreme whale concentration",
+          "color": "red"
+        },
+        {
+          "text": "Top 100 wallets = 63% of all volume",
+          "color": "amber"
+        },
+        {
+          "text": "800K+ addresses made only 1 trade",
+          "color": "blue"
+        }
+      ],
+      "platform": "polymarket"
     },
     {
       "id": 11,
@@ -335,25 +703,71 @@
         "title": "Market Categories on Kalshi",
         "body": "Kalshi structures markets as binary yes/no contracts on specific event outcomes. Each 'event' can have many individual markets — for example, a single NFL game might generate dozens of prop bets (player stats, point spreads, totals). This is why Sports has 3.9M markets. Political markets tend to be bigger events with fewer sub-markets but attract massive concentrated volume during election seasons.",
         "key_terms": [
-          { "term": "Event Ticker", "definition": "Kalshi's internal identifier for groups of related markets. For example, KXMVENFLSINGLEGAME groups all prop bets for a specific NFL game." },
-          { "term": "Binary Market", "definition": "A market with exactly two outcomes: Yes or No. The contract pays $1 if the event happens and $0 if it doesn't." },
-          { "term": "Volume", "definition": "Total number of contracts traded in a market. Higher volume means more liquidity and typically tighter spreads." },
-          { "term": "Prop Bet", "definition": "A bet on a specific proposition within a larger event — e.g., 'Will Player X score 20+ points?' rather than just 'Who wins the game?'" }
+          {
+            "term": "Event Ticker",
+            "definition": "Kalshi's internal identifier for groups of related markets. For example, KXMVENFLSINGLEGAME groups all prop bets for a specific NFL game."
+          },
+          {
+            "term": "Binary Market",
+            "definition": "A market with exactly two outcomes: Yes or No. The contract pays $1 if the event happens and $0 if it doesn't."
+          },
+          {
+            "term": "Volume",
+            "definition": "Total number of contracts traded in a market. Higher volume means more liquidity and typically tighter spreads."
+          },
+          {
+            "term": "Prop Bet",
+            "definition": "A bet on a specific proposition within a larger event — e.g., 'Will Player X score 20+ points?' rather than just 'Who wins the game?'"
+          }
         ]
       },
       "stats": [
-        { "label": "Top Category", "value": "Sports", "color": "accent" },
-        { "label": "Sports Markets", "value": "3.9M", "color": "blue" },
-        { "label": "Sports Volume", "value": "7.5B", "color": "white" },
-        { "label": "Political Markets", "value": "6,881", "color": "red" },
-        { "label": "Political Volume", "value": "1.6B", "color": "red" },
-        { "label": "Total Categories", "value": "9", "color": "white" }
+        {
+          "label": "Top Category",
+          "value": "Sports",
+          "color": "accent"
+        },
+        {
+          "label": "Sports Markets",
+          "value": "3.9M",
+          "color": "blue"
+        },
+        {
+          "label": "Sports Volume",
+          "value": "7.5B",
+          "color": "white"
+        },
+        {
+          "label": "Political Markets",
+          "value": "6,881",
+          "color": "red"
+        },
+        {
+          "label": "Political Volume",
+          "value": "1.6B",
+          "color": "red"
+        },
+        {
+          "label": "Total Categories",
+          "value": "9",
+          "color": "white"
+        }
       ],
       "insights": [
-        { "text": "Sports: 51% of all markets", "color": "accent" },
-        { "text": "Politics: 6.9K markets → 1.6B volume", "color": "red" },
-        { "text": "Crypto markets rapidly growing since 2024", "color": "amber" }
-      ]
+        {
+          "text": "Sports: 51% of all markets",
+          "color": "accent"
+        },
+        {
+          "text": "Politics: 6.9K markets → 1.6B volume",
+          "color": "red"
+        },
+        {
+          "text": "Crypto markets rapidly growing since 2024",
+          "color": "amber"
+        }
+      ],
+      "platform": "kalshi"
     },
     {
       "id": 12,
@@ -367,25 +781,195 @@
         "title": "Understanding Bid-Ask Spreads",
         "body": "The bid-ask spread is the difference between the highest price a buyer will pay (bid) and the lowest price a seller will accept (ask). It represents the cost of immediately trading — you buy at the ask and sell at the bid, instantly losing the spread. Market makers profit from this spread by posting both bids and asks. In traditional stock markets, spreads are fractions of a penny. In prediction markets, they can be tens of cents, reflecting lower liquidity and higher risk.",
         "key_terms": [
-          { "term": "Bid-Ask Spread", "definition": "The difference between the best bid (highest buy) and best ask (lowest sell) price. A 10¢ spread means you lose 10¢ per contract just from the cost of trading." },
-          { "term": "Liquidity", "definition": "How easily you can trade without moving the price. High liquidity = tight spreads, lots of orders. Low liquidity = wide spreads, hard to trade large sizes." },
-          { "term": "Liquidity Smile", "definition": "The pattern where spreads are tightest at extreme prices (near 0¢ or 100¢) and widest in the middle (50¢). This mirrors the options volatility smile." },
-          { "term": "Mid Price", "definition": "The midpoint between bid and ask: (bid + ask) / 2. Used as a fair value estimate when the spread is wide." }
+          {
+            "term": "Bid-Ask Spread",
+            "definition": "The difference between the best bid (highest buy) and best ask (lowest sell) price. A 10¢ spread means you lose 10¢ per contract just from the cost of trading."
+          },
+          {
+            "term": "Liquidity",
+            "definition": "How easily you can trade without moving the price. High liquidity = tight spreads, lots of orders. Low liquidity = wide spreads, hard to trade large sizes."
+          },
+          {
+            "term": "Liquidity Smile",
+            "definition": "The pattern where spreads are tightest at extreme prices (near 0¢ or 100¢) and widest in the middle (50¢). This mirrors the options volatility smile."
+          },
+          {
+            "term": "Mid Price",
+            "definition": "The midpoint between bid and ask: (bid + ask) / 2. Used as a fair value estimate when the spread is wide."
+          }
         ]
       },
       "stats": [
-        { "label": "Avg Spread", "value": "58.3¢", "color": "red" },
-        { "label": "Median Spread", "value": "78¢", "color": "amber" },
-        { "label": "Markets Analyzed", "value": "334K", "color": "blue" },
-        { "label": "Spread @ High Vol", "value": "<20¢", "color": "green" },
-        { "label": "Widest Spread Zone", "value": "30-70¢", "color": "red" },
-        { "label": "Tightest Zone", "value": "Near 0/100¢", "color": "green" }
+        {
+          "label": "Avg Spread",
+          "value": "58.3¢",
+          "color": "red"
+        },
+        {
+          "label": "Median Spread",
+          "value": "78¢",
+          "color": "amber"
+        },
+        {
+          "label": "Markets Analyzed",
+          "value": "334K",
+          "color": "blue"
+        },
+        {
+          "label": "Spread @ High Vol",
+          "value": "<20¢",
+          "color": "green"
+        },
+        {
+          "label": "Widest Spread Zone",
+          "value": "30-70¢",
+          "color": "red"
+        },
+        {
+          "label": "Tightest Zone",
+          "value": "Near 0/100¢",
+          "color": "green"
+        }
       ],
       "insights": [
-        { "text": "Avg 58¢ spread: very wide by market standards", "color": "red" },
-        { "text": "High-volume markets have much tighter spreads", "color": "green" },
-        { "text": "Liquidity smile: edges are cheapest to trade", "color": "blue" }
+        {
+          "text": "Avg 58¢ spread: very wide by market standards",
+          "color": "red"
+        },
+        {
+          "text": "High-volume markets have much tighter spreads",
+          "color": "green"
+        },
+        {
+          "text": "Liquidity smile: edges are cheapest to trade",
+          "color": "blue"
+        }
+      ],
+      "platform": "kalshi"
+    }
+  ],
+  "platforms": {
+    "all": {
+      "hero": {
+        "badge": "485 million trades analyzed",
+        "title": "Prediction Market Microstructure",
+        "subtitle": "12 data-driven analyses of 72M+ Kalshi and 404M+ Polymarket trades revealing how markets price probability, where biases hide, and who actually makes money."
+      },
+      "stats_bar": [
+        {
+          "label": "Total Trades",
+          "value": "476M+",
+          "color": "accent",
+          "sub": "Kalshi + Polymarket combined",
+          "icon": "chart-bar"
+        },
+        {
+          "label": "Contracts Traded",
+          "value": "18.3B",
+          "color": "white",
+          "sub": "Kalshi notional volume",
+          "icon": "layers"
+        },
+        {
+          "label": "Unique Markets",
+          "value": "8.1M",
+          "color": "blue",
+          "sub": "Across both platforms",
+          "icon": "globe"
+        },
+        {
+          "label": "Taker Losses",
+          "value": "-143M",
+          "color": "red",
+          "sub": "Contracts lost to makers",
+          "icon": "trending-down"
+        },
+        {
+          "label": "Maker Gains",
+          "value": "+144M",
+          "color": "green",
+          "sub": "Structural liquidity edge",
+          "icon": "trending-up"
+        }
+      ]
+    },
+    "kalshi": {
+      "hero": {
+        "badge": "CFTC-Regulated Exchange",
+        "title": "Kalshi Market Intelligence",
+        "subtitle": "10 deep analyses of 72M+ trades on America's first regulated prediction market — calibration, bias, maker/taker dynamics, and market microstructure."
+      },
+      "stats_bar": [
+        {
+          "label": "Total Trades",
+          "value": "72.1M",
+          "color": "accent",
+          "sub": "Since June 2021"
+        },
+        {
+          "label": "Contracts Traded",
+          "value": "18.3B",
+          "color": "white",
+          "sub": "Notional volume"
+        },
+        {
+          "label": "Unique Markets",
+          "value": "7.7M",
+          "color": "blue",
+          "sub": "Listed on exchange"
+        },
+        {
+          "label": "Taker Losses",
+          "value": "−143M",
+          "color": "red",
+          "sub": "Contracts lost to makers"
+        },
+        {
+          "label": "Maker Gains",
+          "value": "+144M",
+          "color": "green",
+          "sub": "Structural liquidity edge"
+        }
+      ]
+    },
+    "polymarket": {
+      "hero": {
+        "badge": "On-Chain Prediction Markets",
+        "title": "Polymarket On-Chain Analytics",
+        "subtitle": "Deep dive into 404M+ on-chain trades revealing whale concentration, volume dynamics, and how decentralized prediction markets actually work."
+      },
+      "stats_bar": [
+        {
+          "label": "Total Trades",
+          "value": "404.5M",
+          "color": "accent",
+          "sub": "On-chain transactions"
+        },
+        {
+          "label": "USDC Volume",
+          "value": "$72.5B",
+          "color": "white",
+          "sub": "Total trading volume"
+        },
+        {
+          "label": "Unique Markets",
+          "value": "409K",
+          "color": "blue",
+          "sub": "On Polygon network"
+        },
+        {
+          "label": "Unique Traders",
+          "value": "1.93M",
+          "color": "green",
+          "sub": "Wallet addresses"
+        },
+        {
+          "label": "Whale Concentration",
+          "value": "0.969",
+          "color": "red",
+          "sub": "Gini coefficient"
+        }
       ]
     }
-  ]
+  }
 }

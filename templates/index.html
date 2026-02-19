@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body>
+<body data-platform="all">
 
     <!-- Cursor glow effect -->
     <div class="cursor-glow" id="cursor-glow"></div>
@@ -27,6 +27,20 @@
                     </svg>
                 </div>
                 <span>PredictView</span>
+            </div>
+            <div class="platform-switcher" id="platform-switcher">
+                <button class="platform-btn active" data-platform="all">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    All
+                </button>
+                <button class="platform-btn" data-platform="kalshi">
+                    <span class="platform-dot kalshi-dot"></span>
+                    Kalshi
+                </button>
+                <button class="platform-btn" data-platform="polymarket">
+                    <span class="platform-dot poly-dot"></span>
+                    Polymarket
+                </button>
             </div>
             <div class="nav-links">
                 <a href="#overview" class="active" data-nav="overview">Overview</a>
@@ -69,8 +83,8 @@
     <div class="section" id="analyses">
         <div class="section-header-row">
             <div>
-                <span class="section-eyebrow">Deep Dives</span>
-                <h2 class="section-title">8 Analyses</h2>
+                <span class="section-eyebrow" id="section-eyebrow">Deep Dives</span>
+                <h2 class="section-title" id="section-title">12 Analyses</h2>
             </div>
             <p class="section-desc">Click any card below. Use <kbd>←</kbd> <kbd>→</kbd> arrow keys to navigate.</p>
         </div>
@@ -86,7 +100,7 @@
         <div class="footer-inner">
             <span>Built on <a href="https://github.com/Jon-Becker/prediction-market-analysis" target="_blank" rel="noopener">Jon Becker's dataset</a></span>
             <span class="footer-sep">·</span>
-            <span>72M+ trades</span>
+            <span id="footer-trades">476M+ trades</span>
             <span class="footer-sep">·</span>
             <span>2026</span>
         </div>

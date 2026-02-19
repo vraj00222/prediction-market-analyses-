@@ -845,4 +845,288 @@ footer a:hover { color: var(--accent-bright); }
 @media (max-width: 480px) {
     .stats-row { grid-template-columns: 1fr; }
     .hero h1 { font-size: 28px; letter-spacing: -1px; }
+    .platform-switcher { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PLATFORM SWITCHER
+   ═══════════════════════════════════════════════════════════ */
+
+.platform-switcher {
+    display: flex;
+    gap: 2px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3px;
+}
+
+.platform-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    transition: all 0.35s var(--ease);
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.platform-btn:hover {
+    color: var(--text-secondary);
+    background: rgba(255,255,255,0.04);
+}
+
+.platform-btn.active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(129,140,248,0.3);
+}
+
+.platform-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.platform-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.platform-dot.kalshi-dot { background: #818cf8; box-shadow: 0 0 6px rgba(129,140,248,0.4); }
+.platform-dot.poly-dot   { background: #34d399; box-shadow: 0 0 6px rgba(52,211,153,0.4); }
+
+/* Platform tag on nav items */
+.analysis-platform-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.analysis-platform-tag.tag-kalshi {
+    background: rgba(129,140,248,0.12);
+    color: #a5b4fc;
+}
+
+.analysis-platform-tag.tag-polymarket {
+    background: rgba(52,211,153,0.12);
+    color: #6ee7b7;
+}
+
+.analysis-platform-tag.tag-both {
+    background: rgba(251,191,36,0.12);
+    color: #fbbf24;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   KALSHI THEME
+   ═══════════════════════════════════════════════════════════ */
+
+[data-platform="kalshi"] {
+    --accent:             #6366f1;
+    --accent-bright:      #a5b4fc;
+    --accent-glow:        rgba(99, 102, 241, 0.08);
+    --accent-glow-strong: rgba(99, 102, 241, 0.2);
+    --border-accent:      rgba(99, 102, 241, 0.3);
+}
+
+[data-platform="kalshi"] .hero-radial {
+    background: radial-gradient(ellipse, rgba(99,102,241,0.15) 0%, rgba(67,56,202,0.06) 40%, transparent 70%);
+}
+
+[data-platform="kalshi"] .cursor-glow {
+    background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%);
+}
+
+[data-platform="kalshi"] .hero h1 {
+    background: linear-gradient(135deg, #fff 0%, #c7d2fe 40%, #818cf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-platform="kalshi"] .platform-btn.active {
+    background: #6366f1;
+    box-shadow: 0 2px 16px rgba(99,102,241,0.4);
+}
+
+[data-platform="kalshi"] .btn-primary {
+    background: #6366f1;
+}
+[data-platform="kalshi"] .btn-primary:hover {
+    background: #818cf8;
+    box-shadow: 0 0 24px rgba(99,102,241,0.35), 0 8px 24px rgba(0,0,0,0.3);
+}
+
+[data-platform="kalshi"] .pulse {
+    background: #818cf8;
+    box-shadow: 0 0 8px #818cf8;
+}
+
+[data-platform="kalshi"] .hero-grid-bg {
+    background-image:
+        linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   POLYMARKET THEME
+   ═══════════════════════════════════════════════════════════ */
+
+[data-platform="polymarket"] {
+    --accent:             #10b981;
+    --accent-bright:      #6ee7b7;
+    --accent-glow:        rgba(16, 185, 129, 0.08);
+    --accent-glow-strong: rgba(16, 185, 129, 0.2);
+    --border-accent:      rgba(16, 185, 129, 0.3);
+    --bg:                 #040a08;
+    --bg-elevated:        #081410;
+    --bg-card:            #0a1812;
+    --bg-card-hover:      #10201a;
+}
+
+[data-platform="polymarket"] .hero-radial {
+    background: radial-gradient(ellipse, rgba(16,185,129,0.14) 0%, rgba(5,150,105,0.05) 40%, transparent 70%);
+}
+
+[data-platform="polymarket"] .cursor-glow {
+    background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%);
+}
+
+[data-platform="polymarket"] .hero h1 {
+    background: linear-gradient(135deg, #fff 0%, #a7f3d0 40%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-platform="polymarket"] .platform-btn.active {
+    background: #10b981;
+    box-shadow: 0 2px 16px rgba(16,185,129,0.4);
+}
+
+[data-platform="polymarket"] .btn-primary {
+    background: #10b981;
+}
+[data-platform="polymarket"] .btn-primary:hover {
+    background: #34d399;
+    box-shadow: 0 0 24px rgba(16,185,129,0.35), 0 8px 24px rgba(0,0,0,0.3);
+}
+
+[data-platform="polymarket"] .pulse {
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+}
+
+[data-platform="polymarket"] .hero-grid-bg {
+    background-image:
+        linear-gradient(rgba(16,185,129,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,185,129,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+[data-platform="polymarket"] .analysis-nav-num {
+    background: rgba(16,185,129,0.1);
+    color: #34d399;
+}
+
+[data-platform="polymarket"] .analysis-nav-item.active {
+    border-color: rgba(16,185,129,0.3);
+    box-shadow: 0 0 0 1px rgba(16,185,129,0.3), 0 0 32px rgba(16,185,129,0.08);
+}
+
+[data-platform="polymarket"] .analysis-nav-item::after {
+    background: #10b981;
+}
+
+[data-platform="polymarket"] .section-eyebrow {
+    color: #10b981;
+}
+
+[data-platform="polymarket"] .analysis-heading .num {
+    color: #34d399;
+    background: rgba(16,185,129,0.1);
+}
+
+[data-platform="polymarket"] .analysis-content h3::before {
+    background: #10b981;
+}
+
+[data-platform="polymarket"] .stat-card::before {
+    background: linear-gradient(135deg, transparent 50%, rgba(16,185,129,0.04));
+}
+
+[data-platform="polymarket"] .learn-header {
+    background: rgba(16,185,129,0.06);
+}
+[data-platform="polymarket"] .learn-header:hover {
+    background: rgba(16,185,129,0.12);
+}
+[data-platform="polymarket"] .learn-header svg { color: #10b981; }
+[data-platform="polymarket"] .learn-header h3 { color: #6ee7b7; }
+[data-platform="polymarket"] .learn-term-name { color: #6ee7b7; }
+
+[data-platform="polymarket"] nav.scrolled {
+    background: rgba(4, 10, 8, 0.85);
+}
+
+/* Kalshi-specific element overrides */
+[data-platform="kalshi"] .analysis-nav-item.active {
+    border-color: rgba(99,102,241,0.3);
+    box-shadow: 0 0 0 1px rgba(99,102,241,0.3), 0 0 32px rgba(99,102,241,0.08);
+}
+
+[data-platform="kalshi"] .section-eyebrow {
+    color: #6366f1;
+}
+
+[data-platform="kalshi"] .analysis-heading .num {
+    color: #a5b4fc;
+    background: rgba(99,102,241,0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   THEME TRANSITION
+   ═══════════════════════════════════════════════════════════ */
+
+body {
+    transition: background-color 0.6s var(--ease), color 0.3s;
+}
+
+.hero-radial, .cursor-glow, .hero-grid-bg {
+    transition: background 0.6s var(--ease);
+}
+
+nav, .stat-card, .analysis-card, .kv-item, .learn-section,
+.analysis-nav-item, .btn-primary, .pulse, .section-eyebrow,
+.analysis-heading .num, .analysis-nav-num {
+    transition: all 0.4s var(--ease);
+}
+
+/* Responsive for platform switcher */
+@media (max-width: 768px) {
+    .platform-switcher {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 200;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+    .platform-btn { padding: 8px 12px; font-size: 12px; }
 }
