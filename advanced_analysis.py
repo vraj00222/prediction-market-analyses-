@@ -1,184 +1,33 @@
 """
-================================================================================
-  ADVANCED PREDICTION MARKET ANALYSES  (9–12)
-  -------------------------------------------
-  Builds on the rookie set by adding cross-platform comparison,
-  whale tracking, category breakdowns, and liquidity analysis.
+Advanced Prediction Market Analyses (9–12)
+------------------------------------------
+Modularized runner for all advanced analyses.
 
-  Usage:
-    cd prediction-market-analysis
-    MPLBACKEND=Agg uv run python advanced_analysis.py
+Usage:
+  cd prediction-market-analysis
+  MPLBACKEND=Agg uv run python advanced_analysis.py
 
-  Output: PNGs → output/rookie/ + static/charts/
-          JSONs → static/data/charts/
-================================================================================
+Output: PNGs → output/rookie/ + static/charts/
+        JSONs → static/data/charts/
 """
 
-from pathlib import Path
-import json as _json
-import duckdb
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
-import numpy as np
-import pandas as pd
+from analyses.platform_comparison import platform_comparison
+from analyses.whale_tracker import whale_tracker
+from analyses.market_categories import market_categories
+from analyses.spread_liquidity import spread_liquidity
 
-# ── Config ─────────────────────────────────────────────────────────────────────
-BASE_DIR = Path(__file__).parent
-DATA_DIR = BASE_DIR / "data"
-OUTPUT_DIR = BASE_DIR / "output" / "rookie"
-CHARTS_DIR = BASE_DIR / "static" / "charts"
-CHART_JSON_DIR = BASE_DIR / "static" / "data" / "charts"
-for d in (OUTPUT_DIR, CHARTS_DIR, CHART_JSON_DIR):
-    d.mkdir(parents=True, exist_ok=True)
-
-KALSHI_TRADES = DATA_DIR / "kalshi" / "trades"
-KALSHI_MARKETS = DATA_DIR / "kalshi" / "markets"
-POLY_TRADES = DATA_DIR / "polymarket" / "trades"
-POLY_MARKETS = DATA_DIR / "polymarket" / "markets"
-POLY_BLOCKS = DATA_DIR / "polymarket" / "blocks"
-
-plt.rcParams.update({
-    "figure.facecolor": "#0e1117",
-    "axes.facecolor": "#0e1117",
-    "axes.edgecolor": "#333",
-    "axes.labelcolor": "#e0e0e0",
-    "text.color": "#e0e0e0",
-    "xtick.color": "#aaa",
-    "ytick.color": "#aaa",
-    "grid.color": "#222",
-    "grid.alpha": 0.5,
-    "font.family": "sans-serif",
-    "font.size": 11,
-})
-
-COLORS = {
-    "primary": "#4fc3f7",
-    "secondary": "#81c784",
-    "accent": "#ff8a65",
-    "danger": "#ef5350",
-    "neutral": "#90a4ae",
-    "kalshi": "#818cf8",
-    "poly": "#34d399",
-}
-
-
-def get_connection():
-    return duckdb.connect()
-
-
-def _save(fig, name):
-    for d in (OUTPUT_DIR, CHARTS_DIR):
-        fig.savefig(d / name, dpi=180, bbox_inches="tight", pad_inches=0.3)
-    plt.close(fig)
-    print(f"  Saved: {name}")
-
-
-def _save_json(filename, data):
-    path = CHART_JSON_DIR / filename
-    with open(path, "w") as f:
-        _json.dump(data, f, separators=(",", ":"))
-    print(f"  Saved JSON: {path}")
-
-
-# ══════════════════════════════════════════════════════════════════════════════
-#  9. KALSHI vs POLYMARKET — Platform Comparison
-# ══════════════════════════════════════════════════════════════════════════════
-def analysis_9_platform_comparison():
-    """Compare Kalshi and Polymarket: monthly trades, volume growth, market counts."""
+if __name__ == "__main__":
+    print("\n🔬 Running Advanced Analyses (9–12)...\n")
+    r9 = platform_comparison()
+    r10 = whale_tracker()
+    r11 = market_categories()
+    r12 = spread_liquidity()
     print("\n" + "=" * 60)
-    print("  9/12  KALSHI vs POLYMARKET")
+    print("  ✅ ALL ADVANCED ANALYSES COMPLETE")
     print("=" * 60)
-
-    con = get_connection()
-
-    # Kalshi monthly trade counts
-    print("  Querying Kalshi monthly trades...")
-    kalshi_monthly = con.sql(f"""
-        SELECT
-            DATE_TRUNC('month', created_time) AS month,
-            COUNT(*) AS trades,
-            SUM(count) AS contracts
-        FROM '{KALSHI_TRADES}/*.parquet'
-        GROUP BY 1 ORDER BY 1
-    """).fetchdf()
-
-    # Polymarket monthly trade counts — must join blocks for timestamps
-    print("  Querying Polymarket monthly trades (joining blocks, this may take several minutes)...")
-    poly_monthly = con.sql(f"""
-        SELECT
-            DATE_TRUNC('month', CAST(b.timestamp AS TIMESTAMP)) AS month,
-            COUNT(*) AS trades,
-            SUM(CAST(t.taker_amount AS DOUBLE) / 1e6) AS volume_usdc
-        FROM '{POLY_TRADES}/*.parquet' t
-        JOIN '{POLY_BLOCKS}/*.parquet' b ON t.block_number = b.block_number
-        GROUP BY 1
-        HAVING month IS NOT NULL
-        ORDER BY 1
-    """).fetchdf()
-    poly_monthly = poly_monthly.dropna(subset=["month"])
-
-    # Market counts
-    kalshi_markets_count = con.sql(f"SELECT COUNT(DISTINCT ticker) FROM '{KALSHI_MARKETS}/*.parquet'").fetchone()[0]
-    poly_markets_count = con.sql(f"SELECT COUNT(*) FROM '{POLY_MARKETS}/*.parquet'").fetchone()[0]
-
-    # Total trade counts
-    kalshi_total = int(kalshi_monthly["trades"].sum())
-    poly_total = int(poly_monthly["trades"].sum())
-
-    print(f"  Kalshi: {kalshi_total:,} trades, {kalshi_markets_count:,} markets")
-    print(f"  Polymarket: {poly_total:,} trades, {poly_markets_count:,} markets")
-
-    # ── Plot ──
-    fig, axes = plt.subplots(2, 1, figsize=(14, 10))
-
-    # Panel 1: Monthly trades
-    ax = axes[0]
-    ax.bar(kalshi_monthly["month"], kalshi_monthly["trades"] / 1e6,
-           width=20, alpha=0.8, color=COLORS["kalshi"], label="Kalshi")
-    ax.bar(poly_monthly["month"], poly_monthly["trades"] / 1e6,
-           width=20, alpha=0.8, color=COLORS["poly"], label="Polymarket")
-    ax.set_ylabel("Trades (millions)")
-    ax.set_title("Monthly Trade Count: Kalshi vs Polymarket", fontsize=14, fontweight="bold", pad=12)
-    ax.legend(fontsize=11)
-    ax.grid(axis="y", alpha=0.3)
-
-    # Panel 2: Cumulative trades
-    ax2 = axes[1]
-    k_cum = kalshi_monthly["trades"].cumsum() / 1e6
-    p_cum = poly_monthly["trades"].cumsum() / 1e6
-    ax2.plot(kalshi_monthly["month"], k_cum, color=COLORS["kalshi"], linewidth=2.5, label="Kalshi")
-    ax2.plot(poly_monthly["month"], p_cum, color=COLORS["poly"], linewidth=2.5, label="Polymarket")
-    ax2.fill_between(kalshi_monthly["month"], k_cum, alpha=0.15, color=COLORS["kalshi"])
-    ax2.fill_between(poly_monthly["month"], p_cum, alpha=0.15, color=COLORS["poly"])
-    ax2.set_ylabel("Cumulative Trades (millions)")
-    ax2.set_title("Cumulative Growth", fontsize=14, fontweight="bold", pad=12)
-    ax2.legend(fontsize=11)
-    ax2.grid(axis="y", alpha=0.3)
-
-    fig.tight_layout(pad=2.0)
-    _save(fig, "9_platform_comparison.png")
-
-    # ── JSON ──
-    _save_json("9_platform_comparison.json", {
-        "kalshi_months": [str(d.date()) for d in kalshi_monthly["month"]],
-        "kalshi_trades_m": [round(v / 1e6, 2) for v in kalshi_monthly["trades"]],
-        "kalshi_cum_m": [round(v, 2) for v in k_cum],
-        "poly_months": [str(d.date()) for d in poly_monthly["month"]],
-        "poly_trades_m": [round(v / 1e6, 2) for v in poly_monthly["trades"]],
-        "poly_cum_m": [round(v, 2) for v in p_cum],
-        "kalshi_total": kalshi_total,
-        "poly_total": poly_total,
-        "kalshi_markets": kalshi_markets_count,
-        "poly_markets": poly_markets_count,
-    })
-
-    return {
-        "kalshi_total": kalshi_total,
-        "poly_total": poly_total,
-        "kalshi_markets": kalshi_markets_count,
-        "poly_markets": poly_markets_count,
-    }
-
+    print(f"  PNGs → output/rookie/")
+    print(f"  PNGs → static/charts/")
+    print(f"  JSONs → static/data/charts/")
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  10. WHALE TRACKER — Polymarket Address Concentration
