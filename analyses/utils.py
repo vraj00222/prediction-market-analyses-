@@ -46,7 +46,7 @@ def get_connection():
 
 def _save(fig, name):
     for d in (OUTPUT_DIR, CHARTS_DIR):
-        fig.savefig(d / name, dpi=180, bbox_inches="tight", pad_inches=0.3)
+        fig.savefig(d / name, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {name}")
 

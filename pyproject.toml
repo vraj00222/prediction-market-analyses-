@@ -1,9 +1,13 @@
 [project]
 name = "prediction-market-analysis"
 version = "0.1.0"
-description = "Add your description here"
+description = "Prediction market analysis dashboard — Kalshi & Polymarket"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.11"
 dependencies = [
-    "flask>=3.1.3",
+    "flask>=3.0",
+    "duckdb>=1.4",
+    "matplotlib>=3.9",
+    "numpy>=1.26",
+    "pandas>=2.1",
 ]
